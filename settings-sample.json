@@ -1,0 +1,10 @@
+{
+  "public": {
+   
+  },
+  "private": {
+    "initEmail": "me@email.com",
+    "initUsername": "me",
+    "initPassword": "roohaharox"
+  }
+}

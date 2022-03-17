@@ -1,0 +1,36 @@
+@import "colors.scss";
+
+.main {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  margin: 25px auto;
+  #header {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    .header-options {
+      display: flex;
+      span {
+        margin-right: 8px;
+        color: $roohaha-red;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+  .main-content {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      width: 22%;
+      p {
+        margin-top: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 5px 0 5px;
+  font-size: 1rem;
+
+  .post-header {
+    display: flex;
+    align-items: baseline;
+    h3 {
+      margin: 0;
+    }
+    .dates {
+      // align-self: center;
+      margin-left: 5px;
+      font-size: 0.8rem;
+    }
+  }
+
+  .body {
+    margin: 10px 0;
+  }
+
+  .tags {
+    ul {
+      display: flex;
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+    }
+  }
+}

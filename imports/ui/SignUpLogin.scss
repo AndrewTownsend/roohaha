@@ -1,0 +1,30 @@
+@import "colors.scss";
+
+.signup-login-form {
+  position: relative;
+  display: flex;
+  form {
+    position: absolute;
+    top: 1.5rem;
+    right: 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border: 1px solid $roohaha-red;
+    padding: 4px;
+    input {
+      width: 300px;
+      margin: 4px 0 0 0;
+    }
+    .error {
+      color: $roohaha-red;
+      font-size: 0.9rem;
+    }
+    .submit-valid {
+      color: white;
+      background-color: $roohaha-red;
+      border: none;
+    }
+  }
+}
