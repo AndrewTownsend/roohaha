@@ -18,8 +18,6 @@ const blogPosts = [
   }
 ]
 
-console.log(Meteor.user());
-
 export const App = () => (
   <div className="main">
     <Header />

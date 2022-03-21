@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Login } from './Login';
 import { SignUp } from './SignUp';
 
 export const Header = ({}) => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const isLoggedIn = !!Meteor.user();
+  const [isLoggedIn, setIsLoggedIn] = useState(Meteor.userId());
+
+  const logout = () => {
+    Meteor.logout(() => {
+      setIsLoggedIn(false);
+    });
+  }
 
   return (
   <div id="header">
+    <span className="header-options">
     {
       isLoggedIn ? 
-      <span>Sign Out</span> :
-      <span className="header-options">
-        <SignUp setMenuOpen={setMenuOpen} />
-        <Login setMenuOpen={setMenuOpen} />
-      </span>
-    
+      <span onClick={() => logout()}>Sign Out</span> :
+      <>
+        <SignUp />
+        <Login setIsLoggedIn={setIsLoggedIn} />
+      </>
     }
+    </span>
   </div>
 );
 

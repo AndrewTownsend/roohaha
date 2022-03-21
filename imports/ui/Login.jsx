@@ -1,18 +1,25 @@
 import { Meteor } from 'meteor/meteor'
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import useFormInput from './hooks/FormInputHook';
+import useOutsideAlerter from './hooks/OutsideClickAlerter';
 
 import './SignUpLogin.scss';
 
-export const Login = ({}) => {
+export const Login = ({
+  setIsLoggedIn
+}) => {
   const [showForm, setShowForm] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
+
+  const componentRef = useRef(null);
+  useOutsideAlerter(componentRef, setShowForm);
 
   const { value: email, bind: bindEmail, reset: resetEmail } = useFormInput('');
   const { value: password, bind: bindPassword, reset: resetPassword } = useFormInput('');
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setError(false);
     Meteor.loginWithPassword(email, password, postLogin);
     resetEmail();
     resetPassword();
@@ -20,20 +27,21 @@ export const Login = ({}) => {
 
   const postLogin = (err) => {
     if (err) {
-      // handle error problem
-      console.log(err);
+      setError(true);
+    } else {
+      setShowForm(false);
+      setIsLoggedIn(true);
     }
-    console.log(Meteor.user())
-    setShowForm(false);
   }
 
   return (
-    <>
+    <div ref={componentRef}>
       {
         showForm ? 
         <div className="signup-login-form">
           <span onClick={() => setShowForm(!showForm)}>Close</span>
           <form onSubmit={onSubmit}>
+            <span className={`${error ? 'error' : 'hide'}`}>Invalid Credentials</span>
             <input type="text" name="email" placeholder="email" maxLength="40" required {...bindEmail} />
             <input type="password" name="password" placeholder="password" required {...bindPassword} />
             <input type="submit" value="Login" required />
@@ -41,6 +49,6 @@ export const Login = ({}) => {
         </div> :
         <span onClick={() => setShowForm(!showForm)}>Login</span>
       }
-    </>
+    </div>
   );
 } 
