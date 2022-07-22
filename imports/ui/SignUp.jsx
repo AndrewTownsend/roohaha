@@ -56,7 +56,6 @@ export const SignUp = ({}) => {
             setError("An unknown error occured")
             break;
         }
-        console.log(result);
         return false;
       }
     })
@@ -65,7 +64,6 @@ export const SignUp = ({}) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const validated = validateAll();
-    console.log(validated)
     if (validated) {
       Accounts.createUser({ username, email, password1 }, () => {
         setShowForm(false);

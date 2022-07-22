@@ -1,7 +1,22 @@
 body {
-  min-width: 100%;
-  min-height: 100%;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 10vw;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
   font-family: sans-serif;
   background-color: #d1d1d1;
+  margin: 0;
+  padding: 0;
+}
+
+body #react-target {
+  display: flex;
+  flex: 1;
+  width: 10vw;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
 }

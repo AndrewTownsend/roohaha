@@ -1,7 +1,7 @@
 import React from 'react';
-import './Tag.scss';
+// import './Tag.scss';
 
-export const Tag = ({tag}) => {
+export const Tag = (tag) => {
 
   return (
     <div className="tag">

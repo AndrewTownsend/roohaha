@@ -1,6 +1,13 @@
 import React from 'react';
-import { Blog } from './Blog.jsx';
-import { Header } from './Header.jsx';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Header from './Header';
+import NotFound from './NotFound';
+import Blog from './blog/Blog';
+import BlogPost from './blog/BlogPost';
 import './App.scss';
 
 const blogPosts = [
@@ -19,17 +26,18 @@ const blogPosts = [
 ]
 
 export const App = () => (
-  <div className="main">
-    <Header />
-    <img src="/assets/logo.png" id="logo" height="35%" width="35%" />
-    <div className="main-content">
-      <div className="left-column">
-        <h2>About Me</h2>
-        <span>
-          <p>I’m a full-stack software engineer with knowledge of a variety of languages, but I prefer working with JavaScript-based frameworks and building web applications. Some of the code I’ve worked on has surely touched your life in some minor way, which is pretty cool.</p>
-          <p>I’m also a poker enthusiast, a voracious bibliophile, and former hardcore gamer that’s become more casual about it in recent years.</p></span>
+  <BrowserRouter>
+    <div className="main">
+      <Header />
+      {/* <img src="/assets/logo.png" id="logo" height="35%" width="35%" /> */}
+      <img src="/assets/logo.png" id="logo" />
+      <div className="main-content">
+        <Routes>
+          <Route path="/" element={<Blog blogPosts={blogPosts} />} />
+          <Route path="/blog/:id" element={<BlogPost />} />  
+          <Route path="*" element={<NotFound />} />  
+        </Routes>
       </div>
-      <Blog blogPosts={blogPosts} />
     </div>
-  </div>
+  </BrowserRouter>
 );

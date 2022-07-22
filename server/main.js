@@ -1,7 +1,9 @@
 import { Meteor } from 'meteor/meteor';
+import SimpleSchema from 'simpl-schema';
 import { Accounts } from 'meteor/accounts-base'
 import { Roles } from 'meteor/alanning:roles';
 import { VALIDATION_RETURN_CODES, MIN_USERNAME_LENGTH, MIN_PASSWORD_LENGTH } from '../lib/constants';
+import BlogPost from '../imports/ui/blog/BlogPost';
 
 
 
@@ -14,7 +16,6 @@ Meteor.methods({
     }
 
     Meteor.call('checkIfUsernameExists', username, (err, result) => {
-      console.log(result);
       if (result) {
         return VALIDATION_RETURN_CODES.USERNAME_EXISTS;
       } else {
@@ -52,7 +53,6 @@ Meteor.methods({
     return (Meteor.users.findOne( {username })) ? true : false;
   },
   checkIfEmailExists (email) {
-    console.log(Meteor.users.find( {"emails.address" : email }).count() > 0)
     return Meteor.users.find( {"emails.address" : email }).count() > 0 ? true : false;
   },
   makeAdmin (userId) {
@@ -69,6 +69,10 @@ Meteor.publish(null, function () {
 })
 
 Meteor.startup(() => {
+  // if (!Meteor.tags?.findOne()) {
+  //   new Mongo.Collection('tags');
+  // }
+
   // eventually switch to enrollment - you don't set a password
   // https://guide.meteor.com/accounts.html#accounts-password 
   if (!Meteor.users.findOne()) {
@@ -80,9 +84,28 @@ Meteor.startup(() => {
     });
 
     Roles.createRole('webmaster');
+    Roles.createRole('author');
     Roles.createRole('commentor');
 
-    Roles.addUsersToRoles(userId, ['webmaster']);
+    Roles.createRole('create');
+    Roles.createRole('editOwn');
+    Roles.createRole('editAny');
+    Roles.createRole('deleteOwn');
+    Roles.createRole('deleteAny');
+    Roles.createRole('readPrivate');
+
+    Roles.addRolesToParent('create', 'webmaster');
+    Roles.addRolesToParent('create', 'author');
+    Roles.addRolesToParent('editOwn', 'webmaster');
+    Roles.addRolesToParent('editAny', 'webmaster');
+    Roles.addRolesToParent('editOwn', 'author');
+    Roles.addRolesToParent('deleteOwn', 'webmaster');
+    Roles.addRolesToParent('deleteAny', 'webmaster');
+    Roles.addRolesToParent('deleteOwn', 'author');
+    Roles.addRolesToParent('readPrivate', 'webmaster');
+    Roles.addRolesToParent('readPrivate', 'author');
+
+    Roles.addUsersToRoles(userId, ['webmaster', 'author']);
     
      
   
