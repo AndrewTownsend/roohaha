@@ -9,7 +9,6 @@ import CurrentlyCard from "./components/CurrentlyCard";
 import SkillsCard from "./components/SkillsCard";
 import RecentHighlightsCard from "./components/RecentHighlightsCard";
 import QuickFactsCard from "./components/QuickFactsCard";
-import WritingCard from "./components/WritingCard";
 import ReadingPlayingCard from "./components/ReadingPlayingCard";
 import ContactCard from "./components/ContactCard";
 

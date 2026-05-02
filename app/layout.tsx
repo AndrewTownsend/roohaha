@@ -39,7 +39,7 @@ export default function RootLayout({
       lang="en"
       className={`${syne.variable} ${spaceGrotesk.variable} ${dmMono.variable}`}
     >
-      <body suppressHydrationWarning>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
