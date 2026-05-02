@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
   try {
     await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: env.CONTACT_FROM_EMAIL,
       to: [env.CONTACT_TO_EMAIL],
       replyTo: email,
       subject: `New message from ${name} via roohaha.com`,
