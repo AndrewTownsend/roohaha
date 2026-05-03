@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { signOut } from "@/auth";
 import { Card } from "@/app/components/ui";
+import { LogoSvg } from "@/app/components/icons";
 
 export const metadata = { title: "Admin — roohaha.com" };
 
@@ -10,34 +11,30 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#111825",
-        padding: "40px 16px",
-      }}
-    >
-      <div style={{ maxWidth: 680, margin: "0 auto" }}>
+    <div style={{ minHeight: "100vh", background: "#111825" }}>
+      <nav style={{ borderBottom: "1px solid #243048" }}>
         <div
           style={{
+            maxWidth: 1140,
+            margin: "0 auto",
             display: "flex",
-            justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: 24,
+            justifyContent: "space-between",
+            padding: "14px 36px",
           }}
         >
+          <Link href="/" aria-label="roohaha home">
+            <LogoSvg />
+          </Link>
           <span
             style={{
               fontFamily: "var(--font-dm-mono), monospace",
-              fontSize: 13,
-              color: "#7a90a8",
+              fontSize: 12,
+              color: "#5a7088",
               letterSpacing: "0.05em",
             }}
           >
-            <Link href="/" style={{ color: "#7a90a8", textDecoration: "none" }}>
-              roohaha
-            </Link>
-            {" / admin"}
+            admin
           </span>
           <form
             action={async () => {
@@ -61,6 +58,8 @@ export default function AdminLayout({
             </button>
           </form>
         </div>
+      </nav>
+      <div style={{ maxWidth: 680, margin: "40px auto", padding: "0 16px" }}>
         <Card>{children}</Card>
       </div>
     </div>

@@ -43,7 +43,7 @@ export default function Hero() {
         />
         {/* Mobile-only: name + title beside photo */}
         <div className="md:hidden">
-          <div
+          <h1
             className="anim anim-2"
             style={{
               fontFamily: "var(--font-syne), sans-serif",
@@ -52,10 +52,11 @@ export default function Hero() {
               color: "#f0f4f8",
               lineHeight: 1.05,
               letterSpacing: "-0.02em",
+              margin: 0,
             }}
           >
             Andrew V. Townsend
-          </div>
+          </h1>
           <div className="anim anim-3" style={{ fontSize: "0.75rem", color: "#7a90a8", marginTop: 4 }}>
             Senior Full Stack Engineer
           </div>
@@ -64,7 +65,7 @@ export default function Hero() {
 
       <div style={{ flex: 1 }}>
         {/* Desktop-only: large name + title */}
-        <div
+        <h1
           className="anim anim-2 max-md:hidden"
           style={{
             fontFamily: "var(--font-syne), sans-serif",
@@ -73,10 +74,11 @@ export default function Hero() {
             color: "#f0f4f8",
             lineHeight: 1.05,
             letterSpacing: "-0.02em",
+            margin: 0,
           }}
         >
           Andrew V. Townsend
-        </div>
+        </h1>
         <div
           className="anim anim-3 max-md:hidden"
           style={{
