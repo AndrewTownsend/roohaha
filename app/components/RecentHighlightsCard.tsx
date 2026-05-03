@@ -32,8 +32,8 @@ export default function RecentHighlightsCard() {
       <SectionLabel>Recent Highlights</SectionLabel>
       <AccentBar />
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-        {HIGHLIGHT_GROUPS.map((group, i) => (
-          <HighlightSection key={i} {...group} />
+        {HIGHLIGHT_GROUPS.map((group) => (
+          <HighlightSection key={group.label ?? group.highlights[0].title} {...group} />
         ))}
       </div>
     </Card>
