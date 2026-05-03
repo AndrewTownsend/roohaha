@@ -1,3 +1,5 @@
+import AdminLink from "./AdminLink";
+
 const LINKS = [
   { label: "LinkedIn ↗", href: "https://www.linkedin.com/in/andrew-townsend-6876836/" },
   { label: "GitHub ↗", href: "https://github.com/AndrewTownsend" },
@@ -27,8 +29,9 @@ export default function Footer() {
             </a>
           ))}
         </div>
-        <span style={{ fontFamily: "var(--font-dm-mono), monospace", fontSize: 11, color: "#2a3a4e" }}>
+        <span style={{ fontFamily: "var(--font-dm-mono), monospace", fontSize: 11, color: "#2a3a4e", display: "flex", alignItems: "center", gap: 12 }}>
           roohaha.com
+          <AdminLink />
         </span>
       </div>
     </footer>
