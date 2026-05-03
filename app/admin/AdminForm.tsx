@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useState } from "react";
 import { saveContent } from "./actions";
 import { SectionLabel } from "@/app/components/ui";
@@ -85,7 +86,7 @@ export default function AdminForm({
         </p>
       )}
 
-      <div style={{ marginTop: 20 }}>
+      <div style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 12 }}>
         <button
           type="submit"
           disabled={isPending || hasErrors}
@@ -93,6 +94,11 @@ export default function AdminForm({
         >
           {isPending ? "Saving…" : "Save"}
         </button>
+        {state?.ok && (
+          <Link href="/" style={viewLinkStyle}>
+            View on site →
+          </Link>
+        )}
       </div>
     </form>
   );
@@ -133,4 +139,11 @@ const buttonStyle: React.CSSProperties = {
   borderRadius: 6,
   padding: "8px 20px",
   cursor: "pointer",
+};
+
+const viewLinkStyle: React.CSSProperties = {
+  fontFamily: "var(--font-dm-mono), monospace",
+  fontSize: 12,
+  color: "#4caf7d",
+  textDecoration: "none",
 };
