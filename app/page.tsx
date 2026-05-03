@@ -1,6 +1,3 @@
-import fs from "fs";
-import path from "path";
-import type { Book, Game } from "./types";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
@@ -11,19 +8,10 @@ import RecentHighlightsCard from "./components/RecentHighlightsCard";
 import QuickFactsCard from "./components/QuickFactsCard";
 import ReadingPlayingCard from "./components/ReadingPlayingCard";
 import ContactCard from "./components/ContactCard";
+import { readReading, readPlaying } from "./lib/content";
 
-function readContent<T>(filename: string): T[] {
-  const file = path.join(process.cwd(), "content", filename);
-  try {
-    return JSON.parse(fs.readFileSync(file, "utf8")) as T[];
-  } catch {
-    return [];
-  }
-}
-
-export default function Home() {
-  const books = readContent<Book>("reading.json");
-  const games = readContent<Game>("playing.json");
+export default async function Home() {
+  const [books, games] = await Promise.all([readReading(), readPlaying()]);
 
   return (
     <>
