@@ -2,6 +2,7 @@
 
 import { adminEnv } from "@/app/lib/admin-env";
 import { auth } from "@/auth";
+import logger from "@/logger";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { z } from "zod";
 
@@ -87,13 +88,11 @@ export async function saveContent(
 
   if (!res.ok) {
     const text = await res.text().catch(() => res.statusText);
-    console.error("[admin] Edge Config write failed:", res.status, text);
+    logger.error({ status: res.status, text }, "[admin] Edge Config write failed");
     return { ok: false, error: `Edge Config write failed: ${res.status}` };
   }
 
-  console.log(
-    `[admin] content saved by ${session.user.email} at ${new Date().toISOString()}`,
-  );
+  logger.info({ email: session.user.email }, "[admin] content saved");
 
   revalidateTag("content", "max");
   revalidatePath("/");

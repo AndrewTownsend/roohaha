@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useSyncExternalStore, FormEvent, ChangeEvent, FocusEvent } from "react";
+import { useState, useRef, useSyncExternalStore, type FormEvent, type ChangeEvent, type FocusEvent } from "react";
 
 type Status = "idle" | "loading" | "success" | "error";
 type FieldErrors = { name?: string; email?: string; message?: string };
@@ -120,7 +120,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
+    <form onSubmit={(e) => { void handleSubmit(e); }} noValidate className="flex flex-col gap-3">
       <div className="flex flex-col gap-1">
         <label htmlFor="cf-name" className="form-label">Name</label>
         <input

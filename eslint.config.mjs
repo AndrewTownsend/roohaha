@@ -25,9 +25,6 @@ const eslintConfig = defineConfig([
         fixStyle: "inline-type-imports",
       }],
       "@typescript-eslint/no-non-null-assertion": "error",
-      "@typescript-eslint/no-floating-promises": "error",
-      "@typescript-eslint/await-thenable": "error",
-      "@typescript-eslint/no-misused-promises": "error",
 
       // General
       "no-console": "warn",
@@ -44,6 +41,28 @@ const eslintConfig = defineConfig([
       "react/jsx-no-useless-fragment": ["error", { allowExpressions: true }],
       "react/jsx-curly-brace-presence": ["error", { props: "never", children: "never" }],
       "react/no-array-index-key": "warn",
+    },
+  },
+  {
+    // .tsx files are potentially client components — pino can't be bundled there
+    files: ["**/*.tsx"],
+    rules: {
+      "no-console": "off",
+    },
+  },
+  {
+    // Type-aware rules — require parserOptions.project
+    files: ["**/*.ts", "**/*.tsx"],
+    languageOptions: {
+      parserOptions: {
+        project: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    rules: {
+      "@typescript-eslint/no-floating-promises": "error",
+      "@typescript-eslint/await-thenable": "error",
+      "@typescript-eslint/no-misused-promises": "error",
     },
   },
 ]);

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import type { z } from "zod";
 
 export function validateEnv<T extends z.ZodRawShape>(
   schema: z.ZodObject<T>,

@@ -1,7 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
 import type { envType } from "@/app/lib/env";
+import logger from "@/logger";
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Name too short"),
@@ -46,7 +47,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("Resend error:", err);
+    logger.error({ err }, "Resend error");
     return NextResponse.json({ error: "Failed to send message" }, { status: 500 });
   }
 }
