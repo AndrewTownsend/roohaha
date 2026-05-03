@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, FormEvent, ChangeEvent, FocusEvent } from "react";
+import { useState, useRef, useSyncExternalStore, FormEvent, ChangeEvent, FocusEvent } from "react";
 
 type Status = "idle" | "loading" | "success" | "error";
 type FieldErrors = { name?: string; email?: string; message?: string };
@@ -34,8 +34,7 @@ export default function ContactForm() {
   const [submitError, setSubmitError] = useState("");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const messageDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(() => () => {}, () => true, () => false);
 
   function setFieldError(field: keyof FieldErrors, error: string | undefined) {
     setFieldErrors((prev) => ({ ...prev, [field]: error }));
