@@ -31,7 +31,7 @@ export function Card({ children, variant = "default", id }: CardProps) {
 }
 
 export function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <div className="section-label">{children}</div>;
+  return <h2 className="section-label">{children}</h2>;
 }
 
 export function AccentBar() {

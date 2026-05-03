@@ -51,7 +51,7 @@ a { color: inherit; text-decoration: none; }
   color: #7a90a8;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  margin-bottom: 8px;
+  margin: 0 0 8px;
 }
 .accent-bar {
   width: 28px;
