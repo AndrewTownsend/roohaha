@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { signOut } from "@/auth";
 import { Card } from "@/app/components/ui";
 
@@ -33,7 +34,10 @@ export default function AdminLayout({
               letterSpacing: "0.05em",
             }}
           >
-            roohaha / admin
+            <Link href="/" style={{ color: "#7a90a8", textDecoration: "none" }}>
+              roohaha
+            </Link>
+            {" / admin"}
           </span>
           <form
             action={async () => {
