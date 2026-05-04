@@ -149,7 +149,7 @@ describe('ContributionGraph', () => {
   it('renders day cells with title attributes containing dates', async () => {
     mockImpl = async () => makeCalendar();
     const html = renderComponent(await ContributionGraph());
-    assert.ok(html.includes('2025-01-05'), `expected cell title with date "2025-01-05" in HTML:\n${html}`);
+    assert.ok(html.includes('Jan 5, 2025'), `expected cell title with date "Jan 5, 2025" in HTML:\n${html}`);
   });
 
   it('renders the correct tooltip for a cell with contributions', async () => {
