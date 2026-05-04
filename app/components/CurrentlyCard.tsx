@@ -7,7 +7,7 @@ export default function CurrentlyCard() {
       <AccentBar />
       <div
         style={{
-          fontFamily: "var(--font-syne), sans-serif",
+          fontFamily: "var(--font-space-grotesk), sans-serif",
           fontSize: "1rem",
           fontWeight: 700,
           color: "#1a2235",

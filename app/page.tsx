@@ -28,13 +28,13 @@ export default async function Home() {
         >
           <div className="flex flex-col gap-4">
             <AboutCard />
-            <CurrentlyCard />
             <ContributionGraph />
             <QuickFactsCard />
             {/* <WritingCard /> */}
             <ContactCard />
           </div>
           <div className="flex flex-col gap-4">
+            <CurrentlyCard />
             <SkillsCard />
             <RecentHighlightsCard />
             <ReadingPlayingCard books={books} games={games} />
