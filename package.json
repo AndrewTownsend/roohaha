@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:build": "tsc -p tsconfig.test.json",
+    "test": "npm run test:build && node --experimental-loader ./__tests__/loader.mjs --experimental-strip-types --experimental-test-module-mocks --test '__tests__/**/*.test.ts'",
     "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {
