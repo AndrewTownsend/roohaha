@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": false,
+    "outDir": ".test-dist",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": { "@/*": ["./*"] }
+  },
+  "include": [
+    "app/lib/github.ts",
+    "app/components/ContributionGraph.tsx",
+    "app/components/ui.tsx",
+    "logger.ts"
+  ]
+}

@@ -8,6 +8,7 @@ import RecentHighlightsCard from "./components/RecentHighlightsCard";
 import QuickFactsCard from "./components/QuickFactsCard";
 import ReadingPlayingCard from "./components/ReadingPlayingCard";
 import ContactCard from "./components/ContactCard";
+import ContributionGraph from "./components/ContributionGraph";
 import { readReading, readPlaying } from "./lib/content";
 
 export default async function Home() {
@@ -28,6 +29,7 @@ export default async function Home() {
           <div className="flex flex-col gap-4">
             <AboutCard />
             <CurrentlyCard />
+            <ContributionGraph />
             <QuickFactsCard />
             {/* <WritingCard /> */}
             <ContactCard />
