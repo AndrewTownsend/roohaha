@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Syne, Space_Grotesk, DM_Mono } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
+import { Analytics } from "@vercel/analytics/next";
 import JsonLd from "./components/JsonLd";
 import "./globals.css";
 
@@ -77,6 +78,7 @@ export default function RootLayout({
       <body>
         <JsonLd />
         <SessionProvider>{children}</SessionProvider>
+        <Analytics />
       </body>
     </html>
   );

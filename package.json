@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@react-email/render": "^2.0.8",
+    "@vercel/analytics": "^2.0.1",
     "@vercel/edge-config": "^1.4.3",
     "next": "16.2.4",
     "next-auth": "5.0.0-beta.31",
