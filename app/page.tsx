@@ -28,7 +28,6 @@ export default async function Home() {
         >
           <div className="flex flex-col gap-4">
             <AboutCard />
-            <CurrentlyCard />
             <ContributionGraph />
             <QuickFactsCard />
             {/* <WritingCard /> */}
@@ -36,6 +35,7 @@ export default async function Home() {
           </div>
           <div className="flex flex-col gap-4">
             <SkillsCard />
+            <CurrentlyCard />
             <RecentHighlightsCard />
             <ReadingPlayingCard books={books} games={games} />
           </div>
