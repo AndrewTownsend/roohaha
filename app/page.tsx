@@ -34,8 +34,8 @@ export default async function Home() {
             <ContactCard />
           </div>
           <div className="flex flex-col gap-4">
-            <SkillsCard />
             <CurrentlyCard />
+            <SkillsCard />
             <RecentHighlightsCard />
             <ReadingPlayingCard books={books} games={games} />
           </div>
