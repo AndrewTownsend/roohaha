@@ -108,8 +108,8 @@ export default function ContributionGrid({ weeks, totalContributions }: Props) {
     <>
       {tooltip && <Tooltip tip={tooltip} />}
 
-      <div style={{ overflowX: "auto" }}>
-        <div style={{ display: "inline-block", minWidth: "max-content" }}>
+      <div style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
+        <div style={{ width: "max-content" }}>
 
           {/* Month labels */}
           <div style={{ position: "relative", height: 16, marginLeft: 28, marginBottom: 4 }}>

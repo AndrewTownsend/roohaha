@@ -33,14 +33,15 @@ export default async function Home() {
             <ContributionGraph />
             <QuickFactsCard />
             {/* <WritingCard /> */}
-            <ContactCard />
           </div>
           <div className="flex flex-col gap-4">
             <CurrentlyCard />
             <SkillsCard />
             <RecentHighlightsCard />
-            <ReadingPlayingCard books={books} games={games} />
           </div>
+          {/* Bottom row: Contact (left/full on mobile) then ReadingPlaying (right on desktop) */}
+          <ContactCard />
+          <ReadingPlayingCard books={books} games={games} />
         </div>
       </main>
 

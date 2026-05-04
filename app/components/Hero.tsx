@@ -22,7 +22,7 @@ export default function Hero() {
   return (
     <div
       style={{ maxWidth: 1140, margin: "0 auto", display: "flex", alignItems: "center", gap: 28, padding: "32px 36px 36px" }}
-      className="max-md:gap-3 max-md:px-4 max-md:py-5"
+      className="max-md:flex-col max-md:items-start max-md:gap-4 max-md:px-4 max-md:py-5"
     >
       {/* Photo + mobile name side-by-side */}
       <div className="flex items-center gap-3">
@@ -63,7 +63,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1 }} className="max-md:w-full">
         {/* Desktop-only: large name + title */}
         <h1
           className="anim anim-2 max-md:hidden"
