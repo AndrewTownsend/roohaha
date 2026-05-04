@@ -3,6 +3,7 @@ import AdminLink from "./AdminLink";
 const LINKS = [
   { label: "LinkedIn ↗", href: "https://www.linkedin.com/in/andrew-townsend-6876836/" },
   { label: "GitHub ↗", href: "https://github.com/AndrewTownsend" },
+  { label: "Source ↗", href: "https://github.com/AndrewTownsend/roohaha" },
 ] as const;
 
 export default function Footer() {
@@ -19,7 +20,7 @@ export default function Footer() {
         }}
         className="max-md:flex-col max-md:gap-2 max-md:items-center max-md:px-4 max-md:py-3"
       >
-        <span style={{ fontFamily: "var(--font-space-grotesk), sans-serif", fontSize: 13, color: "#3d5068" }}>
+        <span style={{ fontFamily: "var(--font-space-grotesk), sans-serif", fontSize: 13, color: "#5a7a96" }}>
           © Andrew Townsend · Herndon, VA
         </span>
         <div style={{ display: "flex", gap: 20 }}>
@@ -29,7 +30,7 @@ export default function Footer() {
             </a>
           ))}
         </div>
-        <span style={{ fontFamily: "var(--font-dm-mono), monospace", fontSize: 11, color: "#2a3a4e", display: "flex", alignItems: "center", gap: 12 }}>
+        <span style={{ fontFamily: "var(--font-dm-mono), monospace", fontSize: 11, color: "#4a6278", display: "flex", alignItems: "center", gap: 12 }}>
           roohaha.com
           <AdminLink />
         </span>

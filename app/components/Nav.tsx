@@ -11,9 +11,13 @@ export default function Nav() {
   return (
     <nav style={{ borderBottom: "1px solid #243048", maxWidth: 1140, margin: "0 auto" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 36px" }}>
-        <a href="#" aria-label="roohaha home">
+        <button
+          onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); setOpen(false); }}
+          aria-label="Scroll to top"
+          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex" }}
+        >
           <LogoSvg />
-        </a>
+        </button>
 
         <div className="nav-desktop-links">
           {NAV_LINKS.map((link) => (
