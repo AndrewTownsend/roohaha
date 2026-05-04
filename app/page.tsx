@@ -18,8 +18,10 @@ export default async function Home() {
     <>
       <header style={{ background: "#1a2235", position: "sticky", top: 0, zIndex: 50 }}>
         <Nav />
-        <Hero />
       </header>
+      <div style={{ background: "#1a2235" }}>
+        <Hero />
+      </div>
 
       <main>
         <div
