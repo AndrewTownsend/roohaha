@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ContributionWeek } from "@/app/lib/github";
 
 // ---------------------------------------------------------------------------
@@ -90,6 +90,14 @@ interface Props {
 
 export default function ContributionGrid({ weeks, totalContributions }: Props) {
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el && window.innerWidth < 640) {
+      el.scrollLeft = el.scrollWidth;
+    }
+  }, []);
 
   // Derive month label positions (first week of each new month)
   const monthLabels: { label: string; col: number }[] = [];
@@ -108,7 +116,7 @@ export default function ContributionGrid({ weeks, totalContributions }: Props) {
     <>
       {tooltip && <Tooltip tip={tooltip} />}
 
-      <div style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
+      <div ref={scrollRef} style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
         <div style={{ width: "max-content" }}>
 
           {/* Month labels */}
