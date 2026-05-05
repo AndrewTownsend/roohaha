@@ -14,6 +14,7 @@
   },
   "include": [
     "app/lib/github.ts",
+    "app/lib/feature-gates.ts",
     "app/components/ContributionGraph.tsx",
     "app/components/ui.tsx",
     "logger.ts"

@@ -1,6 +1,7 @@
 "use server";
 
 import { adminEnv } from "@/app/lib/admin-env";
+import { type FeatureGates } from "@/app/lib/feature-gates";
 import { auth } from "@/auth";
 import logger from "@/logger";
 import { revalidatePath, revalidateTag } from "next/cache";
@@ -98,4 +99,69 @@ export async function saveContent(
   revalidatePath("/");
 
   return { ok: true, value: { reading: books, playing: games } };
+}
+
+const FeatureGatesSchema = z.object({
+  githubGraph: z.boolean(),
+  writing: z.boolean(),
+});
+
+export type SaveFlagsResult =
+  | { ok: true; value: FeatureGates }
+  | { ok: false; error: string };
+
+export async function saveFeatureGates(
+  _prevState: SaveFlagsResult | null,
+  formData: FormData,
+): Promise<SaveFlagsResult> {
+  const session = await auth();
+  if (!session?.user) {
+    return { ok: false, error: "Unauthorized" };
+  }
+
+  if (!adminEnv.EDGE_CONFIG || !adminEnv.VERCEL_API_TOKEN) {
+    return { ok: false, error: "Admin is not configured in this environment" };
+  }
+
+  const parsed = FeatureGatesSchema.safeParse({
+    githubGraph: formData.get("githubGraph") === "on",
+    writing: formData.get("writing") === "on",
+  });
+
+  if (!parsed.success) {
+    return { ok: false, error: "Invalid flag values" };
+  }
+
+  const gates = parsed.data;
+  const edgeConfigId = new URL(adminEnv.EDGE_CONFIG).pathname.slice(1);
+  const teamParam = process.env.VERCEL_TEAM_ID
+    ? `?teamId=${process.env.VERCEL_TEAM_ID}`
+    : "";
+
+  const res = await fetch(
+    `https://api.vercel.com/v1/edge-config/${edgeConfigId}/items${teamParam}`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${adminEnv.VERCEL_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        items: [{ operation: "upsert", key: "featureGates", value: gates }],
+      }),
+    },
+  );
+
+  if (!res.ok) {
+    const text = await res.text().catch(() => res.statusText);
+    logger.error({ status: res.status, text }, "[admin] Feature gates write failed");
+    return { ok: false, error: `Edge Config write failed: ${res.status}` };
+  }
+
+  logger.info({ email: session.user.email, gates }, "[admin] feature gates saved");
+
+  revalidateTag("flags", "max");
+  revalidatePath("/");
+
+  return { ok: true, value: gates };
 }

@@ -17,6 +17,12 @@ const STUBS = {
     '  return { error: () => {}, warn: () => {}, info: () => {}, debug: () => {} };',
     '}',
   ].join(''),
+
+  '@vercel/edge-config': [
+    'let _impl = async () => null;',
+    'export function __setMockGet(fn) { _impl = fn; }',
+    'export function createClient() { return { get: (_key) => _impl(_key) }; }',
+  ].join(''),
 };
 
 function fileExists(p) {

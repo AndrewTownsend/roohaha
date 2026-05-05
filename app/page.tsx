@@ -9,10 +9,16 @@ import QuickFactsCard from "./components/QuickFactsCard";
 import ReadingPlayingCard from "./components/ReadingPlayingCard";
 import ContactCard from "./components/ContactCard";
 import ContributionGraph from "./components/ContributionGraph";
+import WritingCard from "./components/WritingCard";
 import { readReading, readPlaying } from "./lib/content";
+import { readFeatureGates } from "./lib/feature-gates";
 
 export default async function Home() {
-  const [books, games] = await Promise.all([readReading(), readPlaying()]);
+  const [books, games, gates] = await Promise.all([
+    readReading(),
+    readPlaying(),
+    readFeatureGates(),
+  ]);
 
   return (
     <>
@@ -30,16 +36,15 @@ export default async function Home() {
         >
           <div className="flex flex-col gap-4">
             <AboutCard />
-            <ContributionGraph />
+            {gates.githubGraph && <ContributionGraph />}
             <QuickFactsCard />
-            {/* <WritingCard /> */}
+            {gates.writing && <WritingCard />}
           </div>
           <div className="flex flex-col gap-4">
             <CurrentlyCard />
             <SkillsCard />
             <RecentHighlightsCard />
           </div>
-          {/* Bottom row: Contact (left/full on mobile) then ReadingPlaying (right on desktop) */}
           <ContactCard />
           <ReadingPlayingCard books={books} games={games} />
         </div>
