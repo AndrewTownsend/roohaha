@@ -9,7 +9,7 @@
     "lint": "eslint",
     "test:build": "tsc -p tsconfig.test.json",
     "test": "npm run test:build && node --experimental-loader ./__tests__/loader.mjs --experimental-strip-types --experimental-test-module-mocks --test '__tests__/**/*.test.ts'",
-    "prepare": "git config core.hooksPath .githooks"
+    "prepare": "husky"
   },
   "dependencies": {
     "@react-email/render": "^2.0.8",
@@ -31,6 +31,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "husky": "^9.1.7",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
