@@ -97,7 +97,7 @@ export default async function SignInPage() {
 
           <h1
             style={{
-              fontFamily: "var(--font-syne), 'Syne', sans-serif",
+              fontFamily: "var(--font-space-grotesk), 'Space Grotesk', sans-serif",
               fontSize: "1.5rem",
               fontWeight: 700,
               color: "#e8f0f8",
