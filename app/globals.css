@@ -227,3 +227,81 @@ a { color: inherit; text-decoration: none; }
   color: #c0392b;
   letter-spacing: 0.02em;
 }
+
+/* ── Footer easter-egg link ──────────────────────────────── */
+.footer-egg {
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 11px;
+  color: #2a3a4e;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+  transition: color 0.15s, opacity 0.15s;
+}
+.footer-egg:hover { color: #4a7fa5; opacity: 1; }
+
+/* ── Admin signin terminal page ──────────────────────────── */
+@keyframes blink { 50% { opacity: 0; } }
+
+.terminal-page {
+  background: #0d141f;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.terminal-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(74,127,165,0.12), transparent 60%),
+    linear-gradient(180deg, transparent 0, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+}
+.terminal-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,0.012) 0,
+    rgba(255,255,255,0.012) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+.terminal-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  background: #6a9fc5;
+  vertical-align: -2px;
+  margin-left: 2px;
+  animation: blink 1s steps(1, end) infinite;
+}
+.terminal-gh-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 16px;
+  background: #1f2d3f;
+  color: #e8f0f8;
+  border: 1px solid #2a3a4e;
+  border-radius: 4px;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+.terminal-gh-btn:hover { background: #243446; border-color: #4a7fa5; }
+.terminal-gh-btn:active { transform: translateY(1px); }
+.terminal-back-link { color: #5a7088; transition: color 0.15s; }
+.terminal-back-link:hover { color: #6a9fc5; }

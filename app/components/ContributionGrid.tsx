@@ -3,9 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { ContributionWeek } from "@/app/lib/github";
 
-// ---------------------------------------------------------------------------
-// Colour levels (accent-blue palette, empty → full)
-// ---------------------------------------------------------------------------
 const CELL_COLORS = ["#eef1f5", "#c5d9eb", "#91bcd8", "#5f9bbf", "#4a7fa5"] as const;
 
 function getColor(count: number): string {
@@ -57,7 +54,6 @@ function Tooltip({ tip }: { tip: TooltipState }) {
       }}
     >
       {tip.text}
-      {/* Caret */}
       <span
         style={{
           position: "absolute",
@@ -99,7 +95,6 @@ export default function ContributionGrid({ weeks, totalContributions }: Props) {
     }
   }, []);
 
-  // Derive month label positions (first week of each new month)
   const monthLabels: { label: string; col: number }[] = [];
   let lastMonth = -1;
   weeks.forEach((week, col) => {
@@ -119,7 +114,6 @@ export default function ContributionGrid({ weeks, totalContributions }: Props) {
       <div ref={scrollRef} style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
         <div style={{ width: "max-content" }}>
 
-          {/* Month labels */}
           <div style={{ position: "relative", height: 16, marginLeft: 28, marginBottom: 4 }}>
             {monthLabels.map(({ label, col }) => (
               <span
@@ -137,10 +131,7 @@ export default function ContributionGrid({ weeks, totalContributions }: Props) {
             ))}
           </div>
 
-          {/* Day-of-week labels + grid */}
           <div style={{ display: "flex", gap: 4, alignItems: "flex-start" }}>
-
-            {/* Sun / Mon / … / Sat — only Mon, Wed, Fri shown */}
             <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
               <div style={dayLabelStyle} />
               <div style={dayLabelStyle}>Mon</div>
@@ -151,7 +142,6 @@ export default function ContributionGrid({ weeks, totalContributions }: Props) {
               <div style={dayLabelStyle} />
             </div>
 
-            {/* Week columns */}
             <div
               role="img"
               aria-label={`GitHub contribution graph: ${totalContributions.toLocaleString()} contributions in the last year`}
@@ -190,7 +180,6 @@ export default function ContributionGrid({ weeks, totalContributions }: Props) {
             </div>
           </div>
 
-          {/* Contribution total */}
           <p
             style={{
               margin: "10px 0 0 28px",
