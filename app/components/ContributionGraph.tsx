@@ -26,7 +26,6 @@ export default async function ContributionGraph() {
       <SectionLabel>GitHub Activity</SectionLabel>
       <AccentBar />
 
-      {/* Commit / PR / Review counts */}
       <div style={{ marginBottom: 16 }}>
         <div style={{ display: "flex", gap: 24, marginBottom: 5 }}>
           {STATS.map(({ key, label }) => (

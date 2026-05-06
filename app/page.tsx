@@ -39,14 +39,14 @@ export default async function Home() {
             {gates.githubGraph && <ContributionGraph />}
             <QuickFactsCard />
             {gates.writing && <WritingCard />}
+            <ContactCard />
           </div>
           <div className="flex flex-col gap-4">
             <CurrentlyCard />
             <SkillsCard />
             <RecentHighlightsCard />
+            <ReadingPlayingCard books={books} games={games} />
           </div>
-          <ContactCard />
-          <ReadingPlayingCard books={books} games={games} />
         </div>
       </main>
 

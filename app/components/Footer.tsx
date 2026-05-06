@@ -23,12 +23,15 @@ export default function Footer() {
         <span style={{ fontFamily: "var(--font-space-grotesk), sans-serif", fontSize: 13, color: "#5a7a96" }}>
           © Andrew Townsend · Herndon, VA
         </span>
-        <div style={{ display: "flex", gap: 20 }}>
+        <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
           {LINKS.map(({ label, href }) => (
             <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="footer-link">
               {label}
             </a>
           ))}
+          <a href="/admin/signin" className="footer-egg" title="who goes there?">
+            ~/admin ›
+          </a>
         </div>
         <span style={{ fontFamily: "var(--font-dm-mono), monospace", fontSize: 11, color: "#4a6278", display: "flex", alignItems: "center", gap: 12 }}>
           roohaha.com
