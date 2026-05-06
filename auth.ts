@@ -18,7 +18,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: { signIn: "/admin/signin" },
   callbacks: {
     signIn({ profile }) {
-      if (!profile?.email || !profile.email_verified) return false;
+      if (!profile?.email) return false;
       return ALLOWED_ADMINS.has(profile.email.toLowerCase());
     },
     authorized({ auth: session }) {
