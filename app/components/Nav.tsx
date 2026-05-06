@@ -18,6 +18,37 @@ interface NavProps {
   showProjects?: boolean;
 }
 
+function triggerSectionHighlight(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  const fire = () => {
+    el.classList.remove("section-highlight");
+    void el.offsetWidth;
+    el.classList.add("section-highlight");
+    el.addEventListener("animationend", () => el.classList.remove("section-highlight"), { once: true });
+  };
+
+  const rect = el.getBoundingClientRect();
+  const alreadyVisible = rect.top >= 0 && rect.top <= window.innerHeight * 0.85;
+
+  if (alreadyVisible) {
+    fire();
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          observer.disconnect();
+          fire();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    setTimeout(() => observer.disconnect(), 2500);
+  }
+}
+
 export default function Nav({ showProjects = false }: NavProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -40,7 +71,12 @@ export default function Nav({ showProjects = false }: NavProps) {
 
         <div className="nav-desktop-links">
           {navLinks.map((link) => (
-            <a key={link} href={`#${link.toLowerCase()}`} className="nav-link">
+            <a
+              key={link}
+              href={`#${link.toLowerCase()}`}
+              className="nav-link"
+              onClick={() => triggerSectionHighlight(link.toLowerCase())}
+            >
               {link}
             </a>
           ))}
@@ -74,7 +110,7 @@ export default function Nav({ showProjects = false }: NavProps) {
             <a
               key={link}
               href={`#${link.toLowerCase()}`}
-              onClick={() => setOpen(false)}
+              onClick={() => { setOpen(false); triggerSectionHighlight(link.toLowerCase()); }}
               className="nav-link"
               style={{ display: "block", padding: "10px 20px" }}
             >
