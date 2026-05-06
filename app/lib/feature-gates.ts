@@ -1,17 +1,18 @@
 import { createClient } from "@vercel/edge-config";
-import { unstable_cache } from "next/cache";
 
 export interface FeatureGates {
   githubGraph: boolean;
   writing: boolean;
+  projects: boolean;
 }
 
 export const DEFAULT_GATES: FeatureGates = {
   githubGraph: true,
   writing: true,
+  projects: true,
 };
 
-async function fetchFeatureGates(): Promise<FeatureGates> {
+export async function readFeatureGates(): Promise<FeatureGates> {
   if (!process.env.EDGE_CONFIG) {
     return DEFAULT_GATES;
   }
@@ -22,9 +23,6 @@ async function fetchFeatureGates(): Promise<FeatureGates> {
   return {
     githubGraph: stored?.githubGraph ?? false,
     writing: stored?.writing ?? false,
+    projects: stored?.projects ?? false,
   };
 }
-
-export const readFeatureGates = unstable_cache(fetchFeatureGates, ["feature-gates"], {
-  tags: ["flags"],
-});

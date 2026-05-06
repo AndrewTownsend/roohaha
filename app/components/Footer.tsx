@@ -1,12 +1,18 @@
 import AdminLink from "./AdminLink";
 
-const LINKS = [
-  { label: "LinkedIn ↗", href: "https://www.linkedin.com/in/andrew-townsend-6876836/" },
-  { label: "GitHub ↗", href: "https://github.com/AndrewTownsend" },
-  { label: "Source ↗", href: "https://github.com/AndrewTownsend/roohaha" },
+const ALL_LINKS = [
+  { label: "LinkedIn ↗", href: "https://www.linkedin.com/in/andrew-townsend-6876836/", id: "linkedin" },
+  { label: "GitHub ↗", href: "https://github.com/AndrewTownsend", id: "github" },
+  { label: "Source ↗", href: "https://github.com/AndrewTownsend/roohaha", id: "source" },
 ] as const;
 
-export default function Footer() {
+interface FooterProps {
+  hideSource?: boolean;
+}
+
+export default function Footer({ hideSource = false }: FooterProps) {
+  const links = hideSource ? ALL_LINKS.filter((l) => l.id !== "source") : ALL_LINKS;
+
   return (
     <footer style={{ background: "#111825", borderTop: "1px solid #1e2a3a" }}>
       <div
@@ -24,7 +30,7 @@ export default function Footer() {
           © Andrew Townsend · Herndon, VA
         </span>
         <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
-          {LINKS.map(({ label, href }) => (
+          {links.map(({ label, href }) => (
             <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="footer-link">
               {label}
             </a>

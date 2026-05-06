@@ -27,55 +27,63 @@ describe('readFeatureGates', () => {
   it('all flags are enabled by default', () => {
     assert.equal(DEFAULT_GATES.githubGraph, true);
     assert.equal(DEFAULT_GATES.writing, true);
+    assert.equal(DEFAULT_GATES.projects, true);
   });
 
   it('returns gates from Edge Config when EDGE_CONFIG is set', async () => {
     process.env.EDGE_CONFIG = 'https://edge-config.vercel.com/ecfg_test';
-    const mockGates: FeatureGates = { githubGraph: false, writing: true };
+    const mockGates: FeatureGates = { githubGraph: false, writing: true, projects: true };
     __setMockGet(async () => mockGates);
     const result = await readFeatureGates() as FeatureGates;
     assert.deepEqual(result, mockGates);
   });
 
-  it('uses stored value for githubGraph and defaults writing to false when absent', async () => {
+  it('uses stored value for githubGraph and defaults writing/projects to false when absent', async () => {
     process.env.EDGE_CONFIG = 'https://edge-config.vercel.com/ecfg_test';
     __setMockGet(async () => ({ githubGraph: true }));
     const result = await readFeatureGates() as FeatureGates;
-    assert.deepEqual(result, { githubGraph: true, writing: false });
+    assert.deepEqual(result, { githubGraph: true, writing: false, projects: false });
   });
 
-  it('uses stored value for writing and defaults githubGraph to false when absent', async () => {
+  it('uses stored value for writing and defaults githubGraph/projects to false when absent', async () => {
     process.env.EDGE_CONFIG = 'https://edge-config.vercel.com/ecfg_test';
     __setMockGet(async () => ({ writing: true }));
     const result = await readFeatureGates() as FeatureGates;
-    assert.deepEqual(result, { githubGraph: false, writing: true });
+    assert.deepEqual(result, { githubGraph: false, writing: true, projects: false });
+  });
+
+  it('uses stored value for projects and defaults others to false when absent', async () => {
+    process.env.EDGE_CONFIG = 'https://edge-config.vercel.com/ecfg_test';
+    __setMockGet(async () => ({ projects: true }));
+    const result = await readFeatureGates() as FeatureGates;
+    assert.deepEqual(result, { githubGraph: false, writing: false, projects: true });
   });
 
   it('returns all-false when Edge Config key is missing (null)', async () => {
     process.env.EDGE_CONFIG = 'https://edge-config.vercel.com/ecfg_test';
     __setMockGet(async () => null);
     const result = await readFeatureGates() as FeatureGates;
-    assert.deepEqual(result, { githubGraph: false, writing: false });
+    assert.deepEqual(result, { githubGraph: false, writing: false, projects: false });
   });
 
   it('returns all-false when Edge Config key is missing (undefined)', async () => {
     process.env.EDGE_CONFIG = 'https://edge-config.vercel.com/ecfg_test';
     __setMockGet(async () => undefined);
     const result = await readFeatureGates() as FeatureGates;
-    assert.deepEqual(result, { githubGraph: false, writing: false });
+    assert.deepEqual(result, { githubGraph: false, writing: false, projects: false });
   });
 
   it('defaults missing individual flags to false when key is a partial object', async () => {
     process.env.EDGE_CONFIG = 'https://edge-config.vercel.com/ecfg_test';
     __setMockGet(async () => ({}));
     const result = await readFeatureGates() as FeatureGates;
-    assert.deepEqual(result, { githubGraph: false, writing: false });
+    assert.deepEqual(result, { githubGraph: false, writing: false, projects: false });
   });
 
   it('returns all gates disabled when Edge Config explicitly disables all', async () => {
     process.env.EDGE_CONFIG = 'https://edge-config.vercel.com/ecfg_test';
-    __setMockGet(async () => ({ githubGraph: false, writing: false }));
+    __setMockGet(async () => ({ githubGraph: false, writing: false, projects: false }));
     const result = await readFeatureGates() as FeatureGates;
-    assert.deepEqual(result, { githubGraph: false, writing: false });
+    assert.deepEqual(result, { githubGraph: false, writing: false, projects: false });
   });
 });
