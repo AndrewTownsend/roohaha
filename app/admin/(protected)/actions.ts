@@ -104,6 +104,7 @@ export async function saveContent(
 const FeatureGatesSchema = z.object({
   githubGraph: z.boolean(),
   writing: z.boolean(),
+  projects: z.boolean(),
 });
 
 export type SaveFlagsResult =
@@ -126,6 +127,7 @@ export async function saveFeatureGates(
   const parsed = FeatureGatesSchema.safeParse({
     githubGraph: formData.get("githubGraph") === "on",
     writing: formData.get("writing") === "on",
+    projects: formData.get("projects") === "on",
   });
 
   if (!parsed.success) {
