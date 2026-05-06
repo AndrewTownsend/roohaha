@@ -244,7 +244,6 @@ a { color: inherit; text-decoration: none; }
 
 .terminal-page {
   background: #0d141f;
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;

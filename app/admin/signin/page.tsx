@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { signIn } from "@/auth";
+import Nav from "@/app/components/Nav";
 import CenterBoot from "./blocks/CenterBoot";
 import CenterNuke from "./blocks/CenterNuke";
 import CenterGeo from "./blocks/CenterGeo";
@@ -37,7 +38,11 @@ export default function SignInPage() {
   const CenterBlock = CENTER_BLOCKS[Math.floor(Math.random() * CENTER_BLOCKS.length)];
 
   return (
-    <div className="terminal-page">
+    <div style={{ height: "100vh", background: "#0d141f", display: "flex", flexDirection: "column" }}>
+      <header style={{ background: "#1a2235", flexShrink: 0, position: "sticky", top: 0, zIndex: 50 }}>
+        <Nav />
+      </header>
+      <div className="terminal-page" style={{ flex: 1, minHeight: 0 }}>
       <div
         style={{
           position: "relative",
@@ -157,6 +162,7 @@ export default function SignInPage() {
             </Link>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
