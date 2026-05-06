@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { signIn } from "@/auth";
 import Nav from "@/app/components/Nav";
+import { signInWithGitHub } from "./actions";
 import CenterBoot from "./blocks/CenterBoot";
 import CenterNuke from "./blocks/CenterNuke";
 import CenterGeo from "./blocks/CenterGeo";
@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 const SUBHEADS = [
   "// trespassers will be deserialized · be cool",
   "// connection traced · awaiting handshake",
-  "// follow the white rabbit · be cool",
+  "// follow the white rabbit",
 ] as const;
 
 const CENTER_BLOCKS = [CenterBoot, CenterNuke, CenterGeo] as const;
@@ -31,7 +31,7 @@ function GitHubMark() {
   );
 }
 
-export default function SignInPage() {
+export default async function SignInPage() {
   // eslint-disable-next-line react-hooks/purity -- Server Component, safe to use Math.random()
   const subhead = SUBHEADS[Math.floor(Math.random() * SUBHEADS.length)];
   // eslint-disable-next-line react-hooks/purity -- Server Component, safe to use Math.random()
@@ -123,12 +123,7 @@ export default function SignInPage() {
 
           <CenterBlock />
 
-          <form
-            action={async () => {
-              "use server";
-              await signIn("github", { redirectTo: "/admin" });
-            }}
-          >
+          <form action={signInWithGitHub}>
             <button type="submit" className="terminal-gh-btn">
               <GitHubMark />
               <span style={{ flex: 1 }}>Sign in with GitHub</span>
