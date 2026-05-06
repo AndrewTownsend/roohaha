@@ -1,26 +1,45 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { LogoSvg } from "./icons";
 
-const NAV_LINKS = ["About", "Skills", "Highlights", "Contact"] as const;
+const BASE_NAV_LINKS = ["About", "Skills", "Highlights", "Contact"] as const;
+type BaseNavLink = (typeof BASE_NAV_LINKS)[number];
+type NavLink = BaseNavLink | "Projects";
 
-export default function Nav() {
+function buildNavLinks(showProjects: boolean): NavLink[] {
+  if (!showProjects) return [...BASE_NAV_LINKS];
+  return ["About", "Skills", "Projects", "Highlights", "Contact"];
+}
+
+interface NavProps {
+  showProjects?: boolean;
+}
+
+export default function Nav({ showProjects = false }: NavProps) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const navLinks = buildNavLinks(showProjects);
 
   return (
     <nav style={{ borderBottom: "1px solid #243048", maxWidth: 1140, margin: "0 auto" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 36px" }}>
-        <button
-          onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); setOpen(false); }}
-          aria-label="Scroll to top"
-          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex" }}
+        <Link
+          href="/"
+          aria-label="Go to home"
+          style={{ display: "flex" }}
+          onClick={() => {
+            if (pathname === "/") window.scrollTo({ top: 0, behavior: "smooth" });
+            setOpen(false);
+          }}
         >
           <LogoSvg />
-        </button>
+        </Link>
 
         <div className="nav-desktop-links">
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <a key={link} href={`#${link.toLowerCase()}`} className="nav-link">
               {link}
             </a>
@@ -51,7 +70,7 @@ export default function Nav() {
 
       {open && (
         <div className="nav-mobile-menu" style={{ borderTop: "1px solid #243048", padding: "6px 0 12px" }}>
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <a
               key={link}
               href={`#${link.toLowerCase()}`}

@@ -10,20 +10,26 @@ import ReadingPlayingCard from "./components/ReadingPlayingCard";
 import ContactCard from "./components/ContactCard";
 import ContributionGraph from "./components/ContributionGraph";
 import WritingCard from "./components/WritingCard";
+import ProjectsCard from "./components/ProjectsCard";
 import { readReading, readPlaying } from "./lib/content";
 import { readFeatureGates } from "./lib/feature-gates";
+import { readProjects } from "./lib/projects";
 
 export default async function Home() {
-  const [books, games, gates] = await Promise.all([
+  const [books, games, gates, projects] = await Promise.all([
     readReading(),
     readPlaying(),
     readFeatureGates(),
+    readProjects(),
   ]);
+
+  const showProjects = gates.projects && projects.length > 0;
+  const roohahaVisible = showProjects && projects.some((p) => p.id === "roohaha");
 
   return (
     <>
       <header style={{ background: "#1a2235", position: "sticky", top: 0, zIndex: 50 }}>
-        <Nav />
+        <Nav showProjects={showProjects} />
       </header>
       <div style={{ background: "#1a2235" }}>
         <Hero />
@@ -37,6 +43,7 @@ export default async function Home() {
           <div className="flex flex-col gap-4">
             <AboutCard />
             {gates.githubGraph && <ContributionGraph />}
+            {gates.projects && projects.length > 0 && <ProjectsCard projects={projects} />}
             <QuickFactsCard />
             {gates.writing && <WritingCard />}
             <ContactCard />
@@ -50,7 +57,7 @@ export default async function Home() {
         </div>
       </main>
 
-      <Footer />
+      <Footer hideSource={roohahaVisible} />
     </>
   );
 }

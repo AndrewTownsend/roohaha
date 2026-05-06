@@ -1,0 +1,30 @@
+[
+  {
+    "id": "buy-in",
+    "visible": false,
+    "title": "Buy-In",
+    "tagline": "Poker session tracker",
+    "desc": "Track buy-ins, cash-outs, hourly rate and session notes. Spot leaks across cash games and tournaments.",
+    "status": "planned",
+    "statusLabel": "Planning",
+    "meta": "2026 · iOS",
+    "links": [
+      { "kind": "page", "label": "Project page", "href": "/projects/buy-in", "primary": true },
+      { "kind": "ios", "label": "TestFlight", "href": "#" }
+    ]
+  },
+  {
+    "id": "roohaha",
+    "visible": true,
+    "title": "roohaha.com",
+    "tagline": "This site",
+    "desc": "Personal portfolio and project showcase. Next.js, Vercel, and generally CMS-avoidant behavior.",
+    "status": "shipped",
+    "statusLabel": "Open source",
+    "meta": "2026 · Web",
+    "links": [
+      { "kind": "github", "label": "Source", "href": "https://github.com/AndrewTownsend/roohaha", "primary": true },
+      { "kind": "web", "label": "Live", "href": "https://roohaha.com" }
+    ]
+  }
+]

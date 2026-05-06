@@ -13,10 +13,14 @@
     "paths": { "@/*": ["./*"] }
   },
   "include": [
+    "app/types.ts",
     "app/lib/github.ts",
     "app/lib/feature-gates.ts",
+    "app/lib/projects.ts",
     "app/components/ContributionGraph.tsx",
+    "app/components/ProjectsCard.tsx",
     "app/components/ui.tsx",
+    "app/components/icons.tsx",
     "logger.ts"
   ]
 }

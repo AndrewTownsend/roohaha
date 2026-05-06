@@ -22,9 +22,11 @@ export default function FeatureGatesForm({ initialGates }: { initialGates: Featu
 
   const githubGraphInitial = state?.ok ? state.value.githubGraph : initialGates.githubGraph;
   const writingInitial = state?.ok ? state.value.writing : initialGates.writing;
+  const projectsInitial = state?.ok ? state.value.projects : initialGates.projects;
 
   const githubGraph = useBoolField(githubGraphInitial);
   const writing = useBoolField(writingInitial);
+  const projects = useBoolField(projectsInitial);
 
   return (
     <form action={formAction}>
@@ -50,6 +52,16 @@ export default function FeatureGatesForm({ initialGates }: { initialGates: Featu
             style={checkboxStyle}
           />
           Writing section
+        </label>
+        <label style={labelStyle}>
+          <input
+            type="checkbox"
+            name="projects"
+            checked={projects.value}
+            onChange={projects.onChange}
+            style={checkboxStyle}
+          />
+          Projects card
         </label>
       </div>
 
