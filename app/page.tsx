@@ -39,18 +39,22 @@ export default async function Home() {
           style={{ maxWidth: 1140, margin: "0 auto", padding: 16 }}
           className="grid grid-cols-1 gap-4 md:grid-cols-[2fr_1fr]"
         >
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 md:col-start-1 md:row-start-1">
             <AboutCard />
+          </div>
+          <div className="flex flex-col gap-4 md:col-start-2 md:row-start-1">
+            <CurrentlyCard />
+            <SkillsCard />
+            <RecentHighlightsCard />
+          </div>
+          <div className="flex flex-col gap-4 md:col-start-1 md:row-start-2">
             {gates.githubGraph && <ContributionGraph />}
             {gates.projects && projects.length > 0 && <ProjectsCard projects={projects} />}
             <QuickFactsCard />
             {gates.writing && <WritingCard />}
             <ContactCard />
           </div>
-          <div className="flex flex-col gap-4">
-            <CurrentlyCard />
-            <SkillsCard />
-            <RecentHighlightsCard />
+          <div className="flex flex-col gap-4 md:col-start-2 md:row-start-2">
             <ReadingPlayingCard books={books} games={games} />
           </div>
         </div>
