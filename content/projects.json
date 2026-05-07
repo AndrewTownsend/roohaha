@@ -1,16 +1,17 @@
 [
   {
-    "id": "buy-in",
-    "visible": false,
-    "title": "Buy-In",
+    "id": "variance",
+    "visible": true,
+    "title": "Variance",
     "tagline": "Poker session tracker",
-    "desc": "Track buy-ins, cash-outs, hourly rate and session notes. Spot leaks across cash games and tournaments.",
+    "desc": "Track buy-ins, cash-outs, session length, and location — all stored locally on your device. Spot trends in your hourly rate, win rate, and bankroll over time. Spot leaks across cash games and tournaments.",
     "status": "planned",
     "statusLabel": "Planning",
     "meta": "2026 · iOS",
     "links": [
       { "kind": "page", "label": "Project page", "href": "/projects/buy-in", "primary": true },
-      { "kind": "ios", "label": "TestFlight", "href": "#" }
+      { "kind": "ios", "label": "TestFlight", "href": "#" },
+      { "kind": "android", "label": "Play Beta", "href": "#" }
     ]
   },
   {
