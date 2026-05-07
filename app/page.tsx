@@ -24,7 +24,6 @@ export default async function Home() {
   ]);
 
   const showProjects = gates.projects && projects.length > 0;
-  const roohahaVisible = showProjects && projects.some((p) => p.id === "roohaha");
 
   return (
     <>
@@ -57,7 +56,7 @@ export default async function Home() {
         </div>
       </main>
 
-      <Footer hideSource={roohahaVisible} />
+      <Footer />
     </>
   );
 }

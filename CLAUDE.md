@@ -2,7 +2,7 @@
 
 # roohaha — project guide
 
-Personal portfolio site for Andrew V. Townsend. Next.js 16 App Router, deployed on Vercel Hobby. The stack is intentionally minimal — no database, no CMS, no test suite.
+Personal portfolio site for Andrew V. Townsend. Next.js 16 App Router, deployed on Vercel Hobby. The stack is intentionally minimal.
 
 ## Key stack facts
 
