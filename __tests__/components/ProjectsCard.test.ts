@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { renderToString } from 'react-dom/server';
 import type { Project } from '../../app/types.ts';
 
-let mockImpl: () => Promise<Project[]>;
+let mockImpl: () => Promise<Project[]> = async () => [];
 
 const mockReadProjects = mock.fn(async () => mockImpl());
 
@@ -92,8 +92,8 @@ describe('ProjectsCard', () => {
 
   it('renders link chip labels', () => {
     const html = render([BUILDING_PROJECT]);
-    assert.ok(html.includes('Project page'), `expected "Project page" chip in HTML:\n${html}`);
     assert.ok(html.includes('TestFlight'), `expected "TestFlight" chip in HTML:\n${html}`);
+    assert.ok(html.includes('Project page'), `expected "Project page" chip in HTML:\n${html}`);
   });
 
   it('renders link chip hrefs', () => {
@@ -103,7 +103,7 @@ describe('ProjectsCard', () => {
   });
 
   it('applies pj-chip-primary class to primary links', () => {
-    const html = render([BUILDING_PROJECT]);
+    const html = render([SHIPPED_PROJECT]);
     assert.ok(html.includes('pj-chip-primary'), `expected "pj-chip-primary" class in HTML:\n${html}`);
   });
 

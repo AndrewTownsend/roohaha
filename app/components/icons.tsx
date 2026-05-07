@@ -1,3 +1,5 @@
+import type { ProjectLink } from "@/app/types";
+
 export function BookIcon() {
   return (
     <svg
@@ -90,6 +92,15 @@ export function ProjectPageIcon() {
       <line x1="9" y1="17" x2="13" y2="17" />
     </svg>
   );
+}
+
+export function ProjectLinkIcon({ kind }: { kind: ProjectLink["kind"] }) {
+  if (kind === "github")  return <ProjectGitHubIcon />;
+  if (kind === "ios")     return <ProjectIosIcon />;
+  if (kind === "android") return <ProjectAndroidIcon />;
+  if (kind === "web")     return <ProjectWebIcon />;
+  if (kind === "page")    return <ProjectPageIcon />;
+  return null;
 }
 
 export function ProjectArrowIcon() {
