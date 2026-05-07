@@ -4,6 +4,11 @@ import { useActionState, useRef, useState } from "react";
 import { saveProjects, type SaveProjectsResult } from "./actions";
 import type { AdminProject } from "@/app/lib/projects-admin";
 import type { ProjectLink, ProjectStatus } from "@/app/types";
+import {
+  PROJECT_STATUS_TEXT_ON_LIGHT,
+  PROJECT_STATUS_LABEL,
+  PROJECT_STATUS_OPTIONS,
+} from "@/app/lib/project-meta";
 import { SectionLabel } from "@/app/components/ui";
 import {
   Field,
@@ -18,21 +23,6 @@ import {
 
 const MONO = "var(--font-dm-mono), monospace";
 
-const STATUS_OPTIONS: ProjectStatus[] = ["planned", "building", "shipped", "paused"];
-
-const STATUS_LABELS: Record<ProjectStatus, string> = {
-  planned: "Planning",
-  building: "Building",
-  shipped: "Shipped",
-  paused: "Paused",
-};
-
-const STATUS_COLORS: Record<ProjectStatus, string> = {
-  planned: "#8a9ab0",
-  building: "#4a7fa5",
-  shipped: "#4caf7d",
-  paused: "#c48b3c",
-};
 
 const LINK_KINDS: ProjectLink["kind"][] = ["github", "ios", "android", "web", "page"];
 
@@ -151,8 +141,8 @@ function ProjectCard({
           style={{
             fontFamily: MONO,
             fontSize: 10,
-            color: STATUS_COLORS[project.status],
-            border: `1px solid ${STATUS_COLORS[project.status]}`,
+            color: PROJECT_STATUS_TEXT_ON_LIGHT[project.status],
+            border: `1px solid ${PROJECT_STATUS_TEXT_ON_LIGHT[project.status]}`,
             borderRadius: 3,
             padding: "1px 6px",
             flexShrink: 0,
@@ -242,10 +232,10 @@ function ProjectCard({
                 value={project.status}
                 onChange={(e) => {
                   const s = e.target.value as ProjectStatus;
-                  onUpdate({ status: s, statusLabel: STATUS_LABELS[s] });
+                  onUpdate({ status: s, statusLabel: PROJECT_STATUS_LABEL[s] });
                 }}
               >
-                {STATUS_OPTIONS.map((s) => (
+                {PROJECT_STATUS_OPTIONS.map((s) => (
                   <option key={s} value={s}>
                     {s}
                   </option>

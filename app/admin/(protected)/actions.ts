@@ -212,6 +212,7 @@ export async function saveProjects(
   }
 
   logger.info({ email: guard.email }, "[admin] projects saved");
+  revalidateTag("projects", "max");
   revalidatePath("/");
 
   return { ok: true, value: projects };

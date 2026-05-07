@@ -1,49 +1,7 @@
 import { Card, SectionLabel, AccentBar } from "./ui";
-import {
-  ProjectGitHubIcon,
-  ProjectIosIcon,
-  ProjectAndroidIcon,
-  ProjectWebIcon,
-  ProjectPageIcon,
-} from "./icons";
-import type { Project, ProjectLink, ProjectStatus } from "@/app/types";
-
-const DOT_COLOR: Record<ProjectStatus, string> = {
-  building: "#d4a04a",
-  shipped:  "#4ea372",
-  paused:   "#a0a8b4",
-  planned:  "rgba(74,127,165,0.55)",
-};
-
-const STATUS_TEXT_COLOR: Record<ProjectStatus, string> = {
-  building: "#b08838",
-  shipped:  "#3e8a5e",
-  paused:   "#8a93a0",
-  planned:  "#4a7fa5",
-};
-
-function LinkIcon({ kind }: { kind: ProjectLink["kind"] }) {
-  if (kind === "github")  return <ProjectGitHubIcon />;
-  if (kind === "ios")     return <ProjectIosIcon />;
-  if (kind === "android") return <ProjectAndroidIcon />;
-  if (kind === "web")     return <ProjectWebIcon />;
-  if (kind === "page")    return <ProjectPageIcon />;
-  return null;
-}
-
-function LinkChip({ link }: { link: ProjectLink }) {
-  const external = link.kind !== "page";
-  return (
-    <a
-      href={link.href}
-      className={link.primary ? "pj-chip pj-chip-primary" : "pj-chip"}
-      {...(external && { target: "_blank", rel: "noopener noreferrer" })}
-    >
-      <LinkIcon kind={link.kind} />
-      {link.label}
-    </a>
-  );
-}
+import type { Project } from "@/app/types";
+import { PROJECT_STATUS_DOT, PROJECT_STATUS_TEXT_ON_LIGHT } from "@/app/lib/project-meta";
+import { ProjectLinkIcon } from "./icons";
 
 function ProjectRow({
   project,
@@ -54,8 +12,8 @@ function ProjectRow({
   isFirst: boolean;
   isLast: boolean;
 }) {
-  const dotColor = DOT_COLOR[project.status];
-  const textColor = STATUS_TEXT_COLOR[project.status];
+  const dotColor = PROJECT_STATUS_DOT[project.status];
+  const textColor = PROJECT_STATUS_TEXT_ON_LIGHT[project.status];
 
   return (
     <div
@@ -131,14 +89,7 @@ function ProjectRow({
           </p>
         )}
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 5,
-            marginBottom: project.links.length > 0 ? 8 : 0,
-          }}
-        >
+        <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
           <div
             style={{
               width: 6,
@@ -162,10 +113,19 @@ function ProjectRow({
         </div>
 
         {project.links.length > 0 && (
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
             {project.links.map((link) => (
-              <LinkChip key={`${link.kind}-${link.href}`} link={link} />
-            ))}
+                <a
+                  key={`${link.kind}-${link.href}`}
+                  href={link.href}
+                  className={link.primary ? "pj-chip pj-chip-primary" : "pj-chip"}
+                  style={{ fontSize: 11, padding: "4px 10px" }}
+                  {...(link.kind !== "page" && { target: "_blank", rel: "noopener noreferrer" })}
+                >
+                  <ProjectLinkIcon kind={link.kind} />
+                  {link.label}
+                </a>
+              ))}
           </div>
         )}
       </div>

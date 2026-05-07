@@ -9,7 +9,7 @@
     "statusLabel": "Planning",
     "meta": "2026 · Mobile",
     "links": [
-      { "kind": "page", "label": "Project page", "href": "/projects/buy-in", "primary": true },
+      { "kind": "page", "label": "Project page", "href": "/projects/variance", "primary": true },
       { "kind": "ios", "label": "TestFlight", "href": "#" },
       { "kind": "android", "label": "Play Beta", "href": "#" }
     ]
