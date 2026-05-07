@@ -41,13 +41,21 @@ export default async function Home() {
         >
           <div className="flex flex-col gap-4">
             <AboutCard />
+            <div className="flex flex-col gap-4 md:hidden">
+              <CurrentlyCard />
+              <SkillsCard />
+              <RecentHighlightsCard />
+            </div>
             {gates.githubGraph && <ContributionGraph />}
             {gates.projects && projects.length > 0 && <ProjectsCard projects={projects} />}
             <QuickFactsCard />
             {gates.writing && <WritingCard />}
             <ContactCard />
+            <div className="md:hidden">
+              <ReadingPlayingCard books={books} games={games} />
+            </div>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="hidden md:flex flex-col gap-4">
             <CurrentlyCard />
             <SkillsCard />
             <RecentHighlightsCard />
