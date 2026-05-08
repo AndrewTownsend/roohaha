@@ -1,4 +1,4 @@
-import { unstable_cache } from "next/cache";
+import { cacheTag, cacheLife } from "next/cache";
 import logger from "@/logger";
 
 const GITHUB_USERNAME = "AndrewTownsend";
@@ -62,6 +62,13 @@ const QUERY = `{
   }
 }`;
 
+export async function readContributions(): Promise<ContributionData> {
+  "use cache";
+  cacheTag("github-contributions");
+  cacheLife("days");
+  return fetchContributions();
+}
+
 async function fetchContributions(): Promise<ContributionData> {
   const token = process.env.GITHUB_PAT;
   if (!token) {
@@ -102,8 +109,3 @@ async function fetchContributions(): Promise<ContributionData> {
   };
 }
 
-export const readContributions = unstable_cache(
-  fetchContributions,
-  ["github-contributions"],
-  { tags: ["github-contributions"], revalidate: 86400 },
-);

@@ -6,8 +6,6 @@ import CenterNuke from "./blocks/CenterNuke";
 import CenterGeo from "./blocks/CenterGeo";
 import { monoFont } from "./blocks/shared";
 
-export const dynamic = "force-dynamic";
-
 const SUBHEADS = [
   "// trespassers will be deserialized · be cool",
   "// connection traced · awaiting handshake",

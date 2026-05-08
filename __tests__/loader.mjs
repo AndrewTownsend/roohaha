@@ -10,6 +10,9 @@ const STUBS = {
     'export const unstable_cache = (fn, _k, _o) => fn;',
     'export const revalidateTag = () => {};',
     'export const revalidatePath = () => {};',
+    'export const updateTag = () => {};',
+    'export const cacheTag = () => {};',
+    'export const cacheLife = () => {};',
   ].join(''),
 
   pino: [

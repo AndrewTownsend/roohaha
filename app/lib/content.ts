@@ -1,5 +1,5 @@
 import { createClient } from "@vercel/edge-config";
-import { unstable_cache } from "next/cache";
+import { cacheTag, cacheLife } from "next/cache";
 import type { Book, Game } from "@/app/types";
 
 interface Content {
@@ -8,6 +8,9 @@ interface Content {
 }
 
 async function fetchContent(): Promise<Content> {
+  "use cache";
+  cacheTag("content");
+  cacheLife("max");
   if (!process.env.EDGE_CONFIG) {
     throw new Error("EDGE_CONFIG is not set — run `vercel env pull .env.local` to configure it");
   }
@@ -19,14 +22,10 @@ async function fetchContent(): Promise<Content> {
   return { reading: all?.reading ?? [], playing: all?.playing ?? [] };
 }
 
-const readContent = unstable_cache(fetchContent, ["content"], {
-  tags: ["content"],
-});
-
 export async function readReading(): Promise<Book[]> {
-  return (await readContent()).reading;
+  return (await fetchContent()).reading;
 }
 
 export async function readPlaying(): Promise<Game[]> {
-  return (await readContent()).playing;
+  return (await fetchContent()).playing;
 }
