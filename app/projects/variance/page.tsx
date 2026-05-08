@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import ProjectShell from "../_components/ProjectShell";
-import StatusTracker from "../_components/StatusTracker";
 
 export const metadata: Metadata = {
   title: "Variance — roohaha.com",
@@ -17,8 +16,6 @@ const FEATURES = [
   { label: "Expense tracking", detail: "Tips, food, and travel factored into your real P&L — not just what you cashed out" },
   { label: "Home game ledger", detail: "Track who's in for how much and settle up at the end of a home game" },
 ];
-
-const STAGES = ["Planning", "In development", "Beta", "Shipped"];
 
 export default function VariancePage() {
   return (
@@ -120,21 +117,6 @@ export default function VariancePage() {
         </div>
       </section>
 
-      <div style={{ borderTop: "1px solid #dde2ea", paddingTop: 28 }}>
-        <p
-          style={{
-            fontFamily: "var(--font-dm-mono), monospace",
-            fontSize: 11,
-            color: "#8a9ab0",
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            margin: "0 0 20px",
-          }}
-        >
-          Status
-        </p>
-        <StatusTracker stages={STAGES} current="In development" />
-      </div>
     </ProjectShell>
   );
 }

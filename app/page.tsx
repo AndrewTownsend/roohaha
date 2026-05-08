@@ -59,7 +59,7 @@ export default async function Home() {
             <CurrentlyCard />
             <SkillsCard />
             <RecentHighlightsCard />
-            <ReadingPlayingCard books={books} games={games} />
+            <ReadingPlayingCard books={books} games={games} id="reading-playing" />
           </div>
         </div>
       </main>

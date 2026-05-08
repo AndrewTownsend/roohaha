@@ -110,7 +110,7 @@ export default function ReadingForm({
         success={state?.ok ?? false}
         isPending={isPending}
         disabled={hasEmpty}
-        viewHref="/"
+        viewHref="/#reading-playing"
       />
     </form>
   );

@@ -7,7 +7,7 @@ export interface Game {
   title: string;
 }
 
-export type ProjectStatus = 'building' | 'shipped' | 'paused' | 'planned';
+export type ProjectStatus = 'building' | 'shipped' | 'paused' | 'planned' | 'beta';
 
 export interface ProjectLink {
   kind: 'github' | 'ios' | 'android' | 'web' | 'page';
