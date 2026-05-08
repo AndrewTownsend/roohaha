@@ -23,6 +23,34 @@ const STUBS = {
     'export function __setMockGet(fn) { _impl = fn; }',
     'export function createClient() { return { get: (_key) => _impl(_key) }; }',
   ].join(''),
+
+  '@/app/lib/env': [
+    'export const env = {',
+    '  RESEND_API_KEY: "test-key",',
+    '  CONTACT_FROM_EMAIL: "from@test.com",',
+    '  CONTACT_TO_EMAIL: "to@test.com",',
+    '};',
+  ].join('\n'),
+
+  'next/server': [
+    'export class NextResponse {',
+    '  constructor(body, init) { this._json = body; this.status = (init && init.status) || 200; }',
+    '  static json(body, init) { return new NextResponse(body, init); }',
+    '}',
+    'export class NextRequest {}',
+  ].join(''),
+
+  resend: [
+    'export class Resend {',
+    '  constructor(_k) {}',
+    '  get emails() {',
+    '    return { send: (p) => {',
+    '      const fn = globalThis.__mockResendSend;',
+    '      return Promise.resolve(typeof fn === "function" ? fn(p) : {});',
+    '    } };',
+    '  }',
+    '}',
+  ].join(''),
 };
 
 function fileExists(p) {
