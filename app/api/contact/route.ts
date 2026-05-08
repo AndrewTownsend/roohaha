@@ -15,6 +15,10 @@ const contactSchema = z.object({
 
 export type ContactPayload = z.infer<typeof contactSchema>;
 
+function esc(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
 export async function POST(req: NextRequest) {
   // Imported at request time (not build time) so the static site builds
   // without env vars present in CI.
@@ -42,7 +46,7 @@ export async function POST(req: NextRequest) {
       replyTo: email,
       subject: `New message from ${name} via roohaha.com`,
       text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
-      html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><hr/><p>${message.replace(/\n/g, "<br/>")}</p>`,
+      html: `<p><strong>Name:</strong> ${esc(name)}</p><p><strong>Email:</strong> ${esc(email)}</p><hr/><p>${esc(message).replace(/\n/g, "<br/>")}</p>`,
     });
 
     return NextResponse.json({ ok: true });
