@@ -4,16 +4,17 @@ import ProjectShell from "../_components/ProjectShell";
 export const metadata: Metadata = {
   title: "Variance — roohaha.com",
   description:
-    "Variance is a mobile poker session tracker. Log buy-ins, cash-outs, and location. Track your hourly rate, win rate, and bankroll — all stored locally on your device.",
+    "Variance is a mobile app for tracking live poker sessions. It stores everything locally — no account, no cloud, no subscription.",
 };
 
 const FEATURES = [
-  { label: "Session logging", detail: "Buy-in, cash-out, duration, location, game type" },
-  { label: "Profit & loss", detail: "Running bankroll graph with session-by-session breakdown" },
-  { label: "Hourly rate", detail: "Automatically calculated per session and as a rolling average" },
-  { label: "Win rate by format", detail: "Separate tracking for cash games and tournaments" },
-  { label: "Location breakdown", detail: "See where you play best — and worst" },
-  { label: "Local-first", detail: "No account, no cloud sync — your data stays on your device" },
+  { label: "Session logging", detail: "Buy-ins, cash-outs, duration, game type, location, and mid-session add-ons" },
+  { label: "Bankroll tracking", detail: "Running totals with a session-by-session breakdown across cash games and tournaments" },
+  { label: "Performance analytics", detail: "Win rate, hourly rate, and ROI broken down by location, stakes, and time of day" },
+  { label: "Session goals", detail: "Set a stop-loss and stop-win before you sit down, then see how often you honor them over time" },
+  { label: "Health & mental state", detail: "Log your energy and focus before each session and surface how they correlate with your results" },
+  { label: "Expense tracking", detail: "Tips, food, and travel factored into your real P&L — not just what you cashed out" },
+  { label: "Home game ledger", detail: "Track who's in for how much and settle up at the end of a home game" },
 ];
 
 export default function VariancePage() {
@@ -72,36 +73,50 @@ export default function VariancePage() {
         </div>
       </section>
 
-      <div
-        style={{
-          borderTop: "1px solid #dde2ea",
-          paddingTop: 28,
-        }}
-      >
-        <p
+      <section style={{ marginBottom: 48 }}>
+        <h2
           style={{
-            fontFamily: "var(--font-dm-mono), monospace",
-            fontSize: 11,
-            color: "#8a9ab0",
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            margin: "0 0 8px",
+            fontFamily: "var(--font-syne), sans-serif",
+            fontWeight: 700,
+            fontSize: "1.1rem",
+            color: "#1a2235",
+            margin: "0 0 16px",
+            letterSpacing: "-0.01em",
           }}
         >
-          Status
-        </p>
-        <p
-          style={{
-            fontFamily: "var(--font-space-grotesk), sans-serif",
-            fontSize: "0.875rem",
-            color: "#5a7088",
-            lineHeight: 1.6,
-            margin: 0,
-          }}
-        >
-          In early planning. No timeline yet — this page will fill out as the design takes shape.
-        </p>
-      </div>
+          Tech
+        </h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {[
+            { label: "Stack", detail: "React Native, Expo, SQLite, TypeScript" },
+            { label: "Platforms", detail: "iOS and Android" },
+          ].map(({ label, detail }) => (
+            <div key={label}>
+              <span
+                style={{
+                  fontFamily: "var(--font-space-grotesk), sans-serif",
+                  fontWeight: 600,
+                  fontSize: "0.9rem",
+                  color: "#1a2235",
+                }}
+              >
+                {label}
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-space-grotesk), sans-serif",
+                  fontSize: "0.9rem",
+                  color: "#5a7088",
+                }}
+              >
+                {" — "}
+                {detail}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
     </ProjectShell>
   );
 }

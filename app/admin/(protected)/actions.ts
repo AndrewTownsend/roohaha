@@ -35,7 +35,7 @@ const ProjectSchema = z.object({
   title: z.string().min(1).max(120),
   tagline: z.string().min(1).max(160),
   desc: z.string().min(1).max(600),
-  status: z.enum(["building", "shipped", "paused", "planned"]),
+  status: z.enum(["building", "shipped", "paused", "planned", "beta"]),
   statusLabel: z.string().min(1).max(40),
   meta: z.string().max(60),
   links: z.array(ProjectLinkSchema).max(8),

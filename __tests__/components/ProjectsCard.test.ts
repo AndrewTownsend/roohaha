@@ -142,8 +142,8 @@ describe('ProjectsCard', () => {
     assert.ok(html.includes('pj-meta'), `expected "pj-meta" class in HTML:\n${html}`);
   });
 
-  it('renders all four status types without throwing', () => {
-    const statuses: Project['status'][] = ['building', 'shipped', 'paused', 'planned'];
+  it('renders all status types without throwing', () => {
+    const statuses: Project['status'][] = ['building', 'shipped', 'paused', 'planned', 'beta'];
     for (const status of statuses) {
       const project: Project = { ...BUILDING_PROJECT, id: status, status, statusLabel: status };
       assert.doesNotThrow(() => render([project]), `crashed rendering status "${status}"`);

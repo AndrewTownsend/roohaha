@@ -5,11 +5,12 @@ import type { Book, Game } from "@/app/types";
 interface Props {
   books: Book[];
   games: Game[];
+  id?: string;
 }
 
-export default function ReadingPlayingCard({ books, games }: Props) {
+export default function ReadingPlayingCard({ books, games, id }: Props) {
   return (
-    <Card id="reading-playing">
+    <Card id={id}>
       <SectionLabel>Currently Reading</SectionLabel>
       <AccentBar />
       <div style={{ display: "flex", flexDirection: "column", marginBottom: 22 }}>

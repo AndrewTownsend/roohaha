@@ -4,9 +4,9 @@
     "visible": true,
     "title": "Variance",
     "tagline": "Poker session tracker",
-    "desc": "Track buy-ins, cash-outs, session length, and location — all stored locally on your device. Spot trends in your hourly rate, win rate, and bankroll over time. Spot leaks across cash games and tournaments.",
-    "status": "planned",
-    "statusLabel": "Planning",
+    "desc": "Variance is a mobile app for tracking live poker sessions. It stores everything locally — no account, no cloud, no subscription. The goal is to give players clean stats and honest insight into their game without the bloat of most tracking apps.",
+    "status": "building",
+    "statusLabel": "In development",
     "meta": "2026 · Mobile",
     "links": [
       { "kind": "page", "label": "Project page", "href": "/projects/variance", "primary": true },

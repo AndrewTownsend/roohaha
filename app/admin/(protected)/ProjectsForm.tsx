@@ -491,7 +491,7 @@ export default function ProjectsForm({
         success={state?.ok ?? false}
         isPending={isPending}
         disabled={!allValid}
-        viewHref="/"
+        viewHref="/#projects"
       />
     </form>
   );

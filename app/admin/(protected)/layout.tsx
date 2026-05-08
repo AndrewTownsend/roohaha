@@ -59,7 +59,7 @@ export default function AdminLayout({
           </form>
         </div>
       </nav>
-      <div style={{ maxWidth: 920, margin: "40px auto", padding: "0 16px" }}>
+      <div style={{ maxWidth: 920, margin: "0 auto", padding: "40px 16px" }}>
         <Card>{children}</Card>
       </div>
     </div>

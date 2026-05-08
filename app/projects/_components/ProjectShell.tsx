@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { readAllProjects } from "@/app/lib/projects";
 import Footer from "@/app/components/Footer";
 import { LogoSvg, ProjectLinkIcon } from "@/app/components/icons";
-import { PROJECT_STATUS_DOT, PROJECT_STATUS_TEXT_ON_DARK } from "@/app/lib/project-meta";
+import { PROJECT_STATUS_DOT, PROJECT_STATUS_TEXT_ON_DARK, PROJECT_STATUS_TRACKER_STAGES, PROJECT_STATUS_TRACKER_STAGE } from "@/app/lib/project-meta";
+import StatusTracker from "./StatusTracker";
 import type { Project } from "@/app/types";
 
 function ProjectHeader({ project }: { project: Project }) {
@@ -181,6 +182,27 @@ export default async function ProjectShell({
           </p>
 
           {children}
+
+          {PROJECT_STATUS_TRACKER_STAGE[project.status] !== undefined && (
+            <div style={{ borderTop: "1px solid #dde2ea", paddingTop: 28, marginTop: 8 }}>
+              <p
+                style={{
+                  fontFamily: "var(--font-dm-mono), monospace",
+                  fontSize: 11,
+                  color: "#8a9ab0",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  margin: "0 0 20px",
+                }}
+              >
+                Status
+              </p>
+              <StatusTracker
+                stages={[...PROJECT_STATUS_TRACKER_STAGES]}
+                current={PROJECT_STATUS_TRACKER_STAGE[project.status] ?? ""}
+              />
+            </div>
+          )}
 
           {project.links.some((l) => l.kind !== "page") && (
             <div style={{ borderTop: "1px solid #dde2ea", paddingTop: 32, marginTop: 48 }}>
