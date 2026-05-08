@@ -3,7 +3,7 @@ import { SKILLS } from "@/app/data/site";
 
 export default function SkillsCard() {
   return (
-    <Card id="skills">
+    <Card section="skills">
       <SectionLabel>Skills</SectionLabel>
       <AccentBar />
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 2 }}>

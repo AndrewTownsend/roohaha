@@ -12,12 +12,14 @@ interface CardProps {
   children: React.ReactNode;
   variant?: CardVariant;
   id?: string;
+  section?: string;
 }
 
-export function Card({ children, variant = "default", id }: CardProps) {
+export function Card({ children, variant = "default", id, section }: CardProps) {
   return (
     <div
       id={id}
+      data-section={section}
       style={{
         background: "#ffffff",
         border: borderByVariant[variant],
