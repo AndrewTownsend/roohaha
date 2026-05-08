@@ -1,5 +1,6 @@
 export const SKILLS = [
   "Claude",
+  "Claude Design",
   "GitHub Copilot",
   "Prompt Engineering",
   "TypeScript",
