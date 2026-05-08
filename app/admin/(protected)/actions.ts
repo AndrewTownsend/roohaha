@@ -5,7 +5,7 @@ import { type FeatureGates } from "@/app/lib/feature-gates";
 import { type AdminProject } from "@/app/lib/projects-admin";
 import { auth } from "@/auth";
 import logger from "@/logger";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { z } from "zod";
 import type { Book, Game } from "@/app/types";
 
@@ -129,7 +129,7 @@ export async function saveReading(
   }
 
   logger.info({ email: guard.email }, "[admin] reading saved");
-  revalidateTag("content", "max");
+  updateTag("content");
   revalidatePath("/");
 
   return { ok: true, value: books };
@@ -170,7 +170,7 @@ export async function savePlaying(
   }
 
   logger.info({ email: guard.email }, "[admin] playing saved");
-  revalidateTag("content", "max");
+  updateTag("content");
   revalidatePath("/");
 
   return { ok: true, value: games };
@@ -212,7 +212,7 @@ export async function saveProjects(
   }
 
   logger.info({ email: guard.email }, "[admin] projects saved");
-  revalidateTag("projects", "max");
+  updateTag("projects");
   revalidatePath("/");
 
   return { ok: true, value: projects };
@@ -257,7 +257,7 @@ export async function saveFeatureGates(
   }
 
   logger.info({ email: guard.email, gates }, "[admin] feature gates saved");
-  revalidateTag("flags", "max");
+  updateTag("flags");
   revalidatePath("/");
 
   return { ok: true, value: gates };

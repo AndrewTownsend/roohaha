@@ -1,7 +1,7 @@
 import { createClient } from "@vercel/edge-config";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { unstable_cache } from "next/cache";
+import { cacheTag } from "next/cache";
 import type { Project } from "@/app/types";
 
 interface ProjectEntry extends Project {
@@ -9,6 +9,8 @@ interface ProjectEntry extends Project {
 }
 
 async function fetchProjects(): Promise<ProjectEntry[]> {
+  "use cache";
+  cacheTag("projects");
   if (!process.env.EDGE_CONFIG) {
     const raw = readFileSync(join(process.cwd(), "content/projects.json"), "utf-8");
     return JSON.parse(raw) as ProjectEntry[];
@@ -18,15 +20,11 @@ async function fetchProjects(): Promise<ProjectEntry[]> {
   return entries ?? [];
 }
 
-const readCachedProjects = unstable_cache(fetchProjects, ["projects"], {
-  tags: ["projects"],
-});
-
 export async function readProjects(): Promise<Project[]> {
-  const entries = await readCachedProjects();
+  const entries = await fetchProjects();
   return entries.filter((p) => p.visible);
 }
 
 export async function readAllProjects(): Promise<Project[]> {
-  return readCachedProjects();
+  return fetchProjects();
 }

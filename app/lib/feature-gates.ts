@@ -1,4 +1,5 @@
 import { createClient } from "@vercel/edge-config";
+import { cacheTag } from "next/cache";
 
 export interface FeatureGates {
   githubGraph: boolean;
@@ -13,6 +14,8 @@ export const DEFAULT_GATES: FeatureGates = {
 };
 
 export async function readFeatureGates(): Promise<FeatureGates> {
+  "use cache";
+  cacheTag("flags");
   if (!process.env.EDGE_CONFIG) {
     return DEFAULT_GATES;
   }
