@@ -47,9 +47,9 @@ export const metadata: Metadata = {
       "From early-stage startups to Fortune 10 enterprises — building systems at every scale for nearly two decades.",
     images: [
       {
-        url: "/photo.jpg",
-        width: 96,
-        height: 96,
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
         alt: "Andrew V. Townsend",
       },
     ],
@@ -58,11 +58,11 @@ export const metadata: Metadata = {
     username: "AndrewTownsend",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Andrew V. Townsend — Senior Full Stack Engineer",
     description:
       "From early-stage startups to Fortune 10 enterprises — building systems at every scale for nearly two decades.",
-    images: ["/photo.jpg"],
+    images: ["/og-image.png"],
   },
 };
 

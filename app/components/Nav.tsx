@@ -18,8 +18,15 @@ interface NavProps {
   showProjects?: boolean;
 }
 
+function findSection(id: string): HTMLElement | null {
+  const bySection = Array.from(
+    document.querySelectorAll<HTMLElement>(`[data-section="${id}"]`)
+  ).find((el) => el.offsetParent !== null);
+  return bySection ?? document.getElementById(id);
+}
+
 function triggerSectionHighlight(id: string) {
-  const el = document.getElementById(id);
+  const el = findSection(id);
   if (!el) return;
 
   const fire = () => {
@@ -75,7 +82,12 @@ export default function Nav({ showProjects = false }: NavProps) {
               key={link}
               href={`#${link.toLowerCase()}`}
               className="nav-link"
-              onClick={() => triggerSectionHighlight(link.toLowerCase())}
+              onClick={(e) => {
+                e.preventDefault();
+                const id = link.toLowerCase();
+                findSection(id)?.scrollIntoView({ behavior: "smooth" });
+                triggerSectionHighlight(id);
+              }}
             >
               {link}
             </a>
@@ -110,7 +122,13 @@ export default function Nav({ showProjects = false }: NavProps) {
             <a
               key={link}
               href={`#${link.toLowerCase()}`}
-              onClick={() => { setOpen(false); triggerSectionHighlight(link.toLowerCase()); }}
+              onClick={(e) => {
+                e.preventDefault();
+                const id = link.toLowerCase();
+                setOpen(false);
+                findSection(id)?.scrollIntoView({ behavior: "smooth" });
+                triggerSectionHighlight(id);
+              }}
               className="nav-link"
               style={{ display: "block", padding: "10px 20px" }}
             >

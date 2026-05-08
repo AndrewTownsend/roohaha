@@ -28,7 +28,7 @@ function HighlightSection({ label, highlights }: HighlightGroup) {
 
 export default function RecentHighlightsCard() {
   return (
-    <Card id="highlights">
+    <Card section="highlights">
       <SectionLabel>Recent Highlights</SectionLabel>
       <AccentBar />
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
