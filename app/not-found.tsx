@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import Link from "next/link";
+import { connection } from "next/server";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
@@ -29,16 +31,11 @@ function pickVariant() {
   return VARIANTS[Math.floor(Math.random() * VARIANTS.length)];
 }
 
-export default function NotFound() {
+async function NotFoundContent() {
+  await connection();
   const { heading, body } = pickVariant();
-
   return (
-    <>
-      <header style={{ background: "#1a2235", position: "sticky", top: 0, zIndex: 50 }}>
-        <Nav />
-      </header>
-
-      <main
+    <main
         style={{
           background: "#f0f2f5",
           minHeight: "calc(100vh - 60px)",
@@ -108,7 +105,18 @@ export default function NotFound() {
           Take me home
         </Link>
       </main>
+  );
+}
 
+export default function NotFound() {
+  return (
+    <>
+      <header style={{ background: "#1a2235", position: "sticky", top: 0, zIndex: 50 }}>
+        <Nav />
+      </header>
+      <Suspense fallback={null}>
+        <NotFoundContent />
+      </Suspense>
       <Footer />
     </>
   );
