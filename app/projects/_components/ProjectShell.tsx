@@ -144,7 +144,7 @@ export default async function ProjectShell({
 
       <ProjectHeader project={project} />
 
-      <main style={{ background: "#f0f2f5", minHeight: "40vh" }}>
+      <main id="main-content" style={{ background: "#f0f2f5", minHeight: "40vh" }}>
         <div
           style={{ maxWidth: 760, margin: "0 auto", padding: "48px 36px 64px" }}
           className="max-md:px-4 max-md:py-8"

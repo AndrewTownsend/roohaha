@@ -34,7 +34,7 @@ export default async function Home() {
         <Hero />
       </div>
 
-      <main>
+      <main id="main-content">
         <div
           style={{ maxWidth: 1140, margin: "0 auto", padding: 16 }}
           className="grid grid-cols-1 gap-4 md:grid-cols-[2fr_1fr]"

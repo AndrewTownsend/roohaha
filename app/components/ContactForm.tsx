@@ -129,11 +129,13 @@ export default function ContactForm() {
           type="text"
           placeholder="Your name"
           autoComplete="off"
+          aria-invalid={fieldErrors.name ? true : undefined}
+          aria-describedby={fieldErrors.name ? "cf-name-error" : undefined}
           className={`form-input${fieldErrors.name ? " form-input-error" : ""}`}
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        {fieldErrors.name && <span className="form-error">{fieldErrors.name}</span>}
+        {fieldErrors.name && <span id="cf-name-error" className="form-error" role="alert">{fieldErrors.name}</span>}
       </div>
 
       <div className="flex flex-col gap-1">
@@ -144,11 +146,13 @@ export default function ContactForm() {
           type="email"
           placeholder="your@email.com"
           autoComplete="off"
+          aria-invalid={fieldErrors.email ? true : undefined}
+          aria-describedby={fieldErrors.email ? "cf-email-error" : undefined}
           className={`form-input${fieldErrors.email ? " form-input-error" : ""}`}
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        {fieldErrors.email && <span className="form-error">{fieldErrors.email}</span>}
+        {fieldErrors.email && <span id="cf-email-error" className="form-error" role="alert">{fieldErrors.email}</span>}
       </div>
 
       <div className="flex flex-col gap-1">
@@ -157,24 +161,26 @@ export default function ContactForm() {
           id="cf-message"
           name="message"
           placeholder="What's on your mind?"
+          aria-invalid={fieldErrors.message ? true : undefined}
+          aria-describedby={fieldErrors.message ? "cf-message-error" : undefined}
           className={`form-textarea${fieldErrors.message ? " form-input-error" : ""}`}
           onChange={handleMessageChange}
           onBlur={handleMessageBlur}
         />
-        {fieldErrors.message && <span className="form-error">{fieldErrors.message}</span>}
+        {fieldErrors.message && <span id="cf-message-error" className="form-error" role="alert">{fieldErrors.message}</span>}
       </div>
 
-      <button type="submit" disabled={status === "loading"} className="submit-btn">
+      <button type="submit" disabled={status === "loading"} aria-busy={status === "loading"} className="submit-btn">
         {status === "loading" ? "Sending…" : "Send message"}
       </button>
 
       {status === "success" && (
-        <p style={{ fontSize: 13, color: "#4a7fa5" }}>
+        <p role="alert" style={{ fontSize: 13, color: "#4a7fa5" }}>
           Message sent! I&apos;ll get back to you soon.
         </p>
       )}
       {status === "error" && (
-        <p style={{ fontSize: 13, color: "#c0392b" }}>{submitError}</p>
+        <p role="alert" style={{ fontSize: 13, color: "#c0392b" }}>{submitError}</p>
       )}
     </form>
   );

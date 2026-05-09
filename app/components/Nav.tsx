@@ -62,7 +62,10 @@ export default function Nav({ showProjects = false }: NavProps) {
   const navLinks = buildNavLinks(showProjects);
 
   return (
-    <nav style={{ borderBottom: "1px solid #243048", maxWidth: 1140, margin: "0 auto" }}>
+    <nav
+      style={{ borderBottom: "1px solid #243048", maxWidth: 1140, margin: "0 auto" }}
+      onKeyDown={(e) => { if (e.key === "Escape" && open) setOpen(false); }}
+    >
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 36px" }}>
         <Link
           href="/"
@@ -98,8 +101,9 @@ export default function Nav({ showProjects = false }: NavProps) {
           className="nav-hamburger"
           onClick={() => setOpen((o) => !o)}
           style={{ background: "none", border: "none", cursor: "pointer", padding: 4, alignItems: "center" }}
-          aria-label="Toggle navigation"
+          aria-label="Toggle navigation menu"
           aria-expanded={open}
+          aria-controls="nav-mobile-menu"
         >
           {open ? (
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -117,7 +121,7 @@ export default function Nav({ showProjects = false }: NavProps) {
       </div>
 
       {open && (
-        <div className="nav-mobile-menu" style={{ borderTop: "1px solid #243048", padding: "6px 0 12px" }}>
+        <div id="nav-mobile-menu" className="nav-mobile-menu" style={{ borderTop: "1px solid #243048", padding: "6px 0 12px" }}>
           {navLinks.map((link) => (
             <a
               key={link}

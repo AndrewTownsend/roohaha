@@ -36,6 +36,7 @@ interface TooltipState {
 function Tooltip({ tip }: { tip: TooltipState }) {
   return (
     <div
+      aria-hidden="true"
       style={{
         position: "fixed",
         left: tip.x,

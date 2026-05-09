@@ -32,6 +32,7 @@ export default function StatusTracker({ stages, current, color }: StatusTrackerP
         style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 7, flexShrink: 0 }}
       >
         <div
+          className={isCurrent ? `${ANIMATION_NAME}-dot` : undefined}
           style={{
             width: 10,
             height: 10,
@@ -82,6 +83,9 @@ export default function StatusTracker({ stages, current, color }: StatusTrackerP
         @keyframes ${ANIMATION_NAME} {
           0%, 100% { box-shadow: 0 0 0 0 ${colorRipple}; }
           50% { box-shadow: 0 0 0 5px transparent; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .${ANIMATION_NAME}-dot { animation: none; }
         }
       `}</style>
       <div style={{ display: "flex", alignItems: "flex-start" }}>{items}</div>
