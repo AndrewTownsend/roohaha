@@ -101,7 +101,7 @@ export default function Nav({ showProjects = false }: NavProps) {
           className="nav-hamburger"
           onClick={() => setOpen((o) => !o)}
           style={{ background: "none", border: "none", cursor: "pointer", padding: 4, alignItems: "center" }}
-          aria-label="Toggle navigation menu"
+          aria-label="Toggle navigation"
           aria-expanded={open}
           aria-controls="nav-mobile-menu"
         >

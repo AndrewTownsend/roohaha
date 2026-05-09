@@ -39,10 +39,10 @@ describe("AdminTabs", () => {
   describe("tab bar", () => {
     it("renders all four tab buttons", () => {
       renderTabs();
-      expect(screen.getByRole("button", { name: "Projects" })).toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "Reading" })).toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "Playing" })).toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "Feature Gates" })).toBeInTheDocument();
+      expect(screen.getByRole("tab", { name: "Projects" })).toBeInTheDocument();
+      expect(screen.getByRole("tab", { name: "Reading" })).toBeInTheDocument();
+      expect(screen.getByRole("tab", { name: "Playing" })).toBeInTheDocument();
+      expect(screen.getByRole("tab", { name: "Feature Gates" })).toBeInTheDocument();
     });
   });
 
@@ -60,7 +60,7 @@ describe("AdminTabs", () => {
     it("clicking Reading shows the ReadingForm", async () => {
       const user = userEvent.setup();
       renderTabs();
-      await user.click(screen.getByRole("button", { name: "Reading" }));
+      await user.click(screen.getByRole("tab", { name: "Reading" }));
       expect(screen.getByTestId("reading-form")).toBeInTheDocument();
       expect(screen.queryByTestId("projects-form")).not.toBeInTheDocument();
     });
@@ -68,7 +68,7 @@ describe("AdminTabs", () => {
     it("clicking Playing shows the PlayingForm", async () => {
       const user = userEvent.setup();
       renderTabs();
-      await user.click(screen.getByRole("button", { name: "Playing" }));
+      await user.click(screen.getByRole("tab", { name: "Playing" }));
       expect(screen.getByTestId("playing-form")).toBeInTheDocument();
       expect(screen.queryByTestId("projects-form")).not.toBeInTheDocument();
     });
@@ -76,7 +76,7 @@ describe("AdminTabs", () => {
     it("clicking Feature Gates shows the FeatureGatesForm", async () => {
       const user = userEvent.setup();
       renderTabs();
-      await user.click(screen.getByRole("button", { name: "Feature Gates" }));
+      await user.click(screen.getByRole("tab", { name: "Feature Gates" }));
       expect(screen.getByTestId("gates-form")).toBeInTheDocument();
       expect(screen.queryByTestId("projects-form")).not.toBeInTheDocument();
     });
@@ -84,8 +84,8 @@ describe("AdminTabs", () => {
     it("clicking back to Projects restores the Projects panel", async () => {
       const user = userEvent.setup();
       renderTabs();
-      await user.click(screen.getByRole("button", { name: "Reading" }));
-      await user.click(screen.getByRole("button", { name: "Projects" }));
+      await user.click(screen.getByRole("tab", { name: "Reading" }));
+      await user.click(screen.getByRole("tab", { name: "Projects" }));
       expect(screen.getByTestId("projects-form")).toBeInTheDocument();
       expect(screen.queryByTestId("reading-form")).not.toBeInTheDocument();
     });
@@ -95,7 +95,7 @@ describe("AdminTabs", () => {
     it("writes the selected tab to sessionStorage on switch", async () => {
       const user = userEvent.setup();
       renderTabs();
-      await user.click(screen.getByRole("button", { name: "Reading" }));
+      await user.click(screen.getByRole("tab", { name: "Reading" }));
       expect(sessionStorage.getItem("admin:tab")).toBe("reading");
     });
 
