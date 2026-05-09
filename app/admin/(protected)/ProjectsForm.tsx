@@ -95,86 +95,96 @@ function ProjectCard({
         style={{
           display: "flex",
           alignItems: "center",
-          gap: 10,
-          padding: "8px 12px",
           background: "#f7f8fa",
-          cursor: "default",
-          userSelect: "none",
         }}
-        onClick={onToggle}
       >
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          fill="none"
-          style={{
-            flexShrink: 0,
-            transform: expanded ? "rotate(90deg)" : "rotate(0deg)",
-            transition: "transform 0.15s ease",
-            color: "#5a7088",
-            cursor: "pointer",
-          }}
-        >
-          <path
-            d="M5 3L9 7L5 11"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-        <span
-          style={{
-            fontFamily: MONO,
-            fontSize: 12,
-            color: "#1a2235",
-            flex: 1,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {project.title || "New Project"}
-        </span>
-        <span
-          style={{
-            fontFamily: MONO,
-            fontSize: 10,
-            color: PROJECT_STATUS_TEXT_ON_LIGHT[project.status],
-            border: `1px solid ${PROJECT_STATUS_TEXT_ON_LIGHT[project.status]}`,
-            borderRadius: 3,
-            padding: "1px 6px",
-            flexShrink: 0,
-          }}
-        >
-          {project.status}
-        </span>
         <button
           type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onUpdate({ visible: !project.visible });
-          }}
-          title={project.visible ? "Visible — click to hide" : "Hidden — click to show"}
+          onClick={onToggle}
+          aria-expanded={expanded}
+          aria-label={`${project.title || "New Project"} — ${expanded ? "collapse" : "expand"}`}
           style={{
-            fontFamily: MONO,
-            fontSize: 10,
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            flex: 1,
+            padding: "8px 12px",
             background: "none",
-            color: project.visible ? "#4caf7d" : "#8a9ab0",
-            border: `1px solid ${project.visible ? "#4caf7d" : "#dde2ea"}`,
-            borderRadius: 3,
-            padding: "1px 6px",
+            border: "none",
             cursor: "pointer",
-            flexShrink: 0,
+            textAlign: "left",
+            minWidth: 0,
+            userSelect: "none",
           }}
         >
-          {project.visible ? "visible" : "hidden"}
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            aria-hidden="true"
+            style={{
+              flexShrink: 0,
+              transform: expanded ? "rotate(90deg)" : "rotate(0deg)",
+              transition: "transform 0.15s ease",
+              color: "#5a7088",
+            }}
+          >
+            <path
+              d="M5 3L9 7L5 11"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span
+            style={{
+              fontFamily: MONO,
+              fontSize: 12,
+              color: "#1a2235",
+              flex: 1,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {project.title || "New Project"}
+          </span>
+          <span
+            style={{
+              fontFamily: MONO,
+              fontSize: 10,
+              color: PROJECT_STATUS_TEXT_ON_LIGHT[project.status],
+              border: `1px solid ${PROJECT_STATUS_TEXT_ON_LIGHT[project.status]}`,
+              borderRadius: 3,
+              padding: "1px 6px",
+              flexShrink: 0,
+            }}
+          >
+            {project.status}
+          </span>
         </button>
-        <div
-          style={{ display: "flex", gap: 4, flexShrink: 0 }}
-          onClick={(e) => e.stopPropagation()}
-        >
+        <div style={{ display: "flex", gap: 4, padding: "0 8px", flexShrink: 0, alignItems: "center" }}>
+          <button
+            type="button"
+            onClick={() => onUpdate({ visible: !project.visible })}
+            title={project.visible ? "Visible — click to hide" : "Hidden — click to show"}
+            aria-label={project.visible ? "Visible — click to hide" : "Hidden — click to show"}
+            style={{
+              fontFamily: MONO,
+              fontSize: 10,
+              background: "none",
+              color: project.visible ? "#4caf7d" : "#8a9ab0",
+              border: `1px solid ${project.visible ? "#4caf7d" : "#dde2ea"}`,
+              borderRadius: 3,
+              padding: "1px 6px",
+              cursor: "pointer",
+              flexShrink: 0,
+            }}
+          >
+            {project.visible ? "visible" : "hidden"}
+          </button>
           <IconButton onClick={onMoveUp} title="Move up">↑</IconButton>
           <IconButton onClick={onMoveDown} title="Move down">↓</IconButton>
           <IconButton onClick={onRemove} title="Remove project" danger>×</IconButton>
@@ -303,19 +313,21 @@ function ProjectCard({
                     />
                   </Field>
                   <div style={{ paddingBottom: 1 }}>
-                    <label style={{ ...labelStyle, marginBottom: 5 }}>Primary</label>
-                    <input
-                      type="checkbox"
-                      checked={link.primary === true}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          onSetLinkPrimary(li);
-                        } else {
-                          onUpdateLink(li, { primary: undefined });
-                        }
-                      }}
-                      style={{ accentColor: "#1a2235", width: 16, height: 16 }}
-                    />
+                    <label style={{ ...labelStyle, marginBottom: 5, cursor: "pointer" }}>
+                      <span style={{ display: "block", marginBottom: 5 }}>Primary</span>
+                      <input
+                        type="checkbox"
+                        checked={link.primary === true}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            onSetLinkPrimary(li);
+                          } else {
+                            onUpdateLink(li, { primary: undefined });
+                          }
+                        }}
+                        style={{ accentColor: "#1a2235", width: 16, height: 16 }}
+                      />
+                    </label>
                   </div>
                   <div style={{ display: "flex", gap: 4, paddingBottom: 1 }}>
                     <IconButton onClick={() => onRemoveLink(li)} title="Remove link" danger>

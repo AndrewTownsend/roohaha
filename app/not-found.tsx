@@ -36,6 +36,7 @@ async function NotFoundContent() {
   const { heading, body } = pickVariant();
   return (
     <main
+        id="main-content"
         style={{
           background: "#f0f2f5",
           minHeight: "calc(100vh - 60px)",

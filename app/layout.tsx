@@ -77,6 +77,7 @@ export default function RootLayout({
       className={`${syne.variable} ${spaceGrotesk.variable} ${dmMono.variable}`}
     >
       <body>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
         <JsonLd />
         <SessionProvider>{children}</SessionProvider>
         <Analytics />

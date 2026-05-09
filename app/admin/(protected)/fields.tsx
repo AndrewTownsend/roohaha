@@ -1,6 +1,6 @@
 "use client";
 
-import type React from "react";
+import React, { useId } from "react";
 
 const MONO = "var(--font-dm-mono), monospace";
 
@@ -62,10 +62,18 @@ export function Field({
   label: string;
   children: React.ReactNode;
 }) {
+  const id = useId();
+  const nodes = React.Children.toArray(children);
+  const first = nodes[0];
+  const rest = nodes.slice(1);
+  const labeled = React.isValidElement(first)
+    ? React.cloneElement(first as React.ReactElement<{ id?: string }>, { id })
+    : first;
   return (
     <div>
-      <label style={labelStyle}>{label}</label>
-      {children}
+      <label htmlFor={id} style={labelStyle}>{label}</label>
+      {labeled}
+      {rest}
     </div>
   );
 }
@@ -86,6 +94,7 @@ export function IconButton({
       type="button"
       onClick={onClick}
       title={title}
+      aria-label={title}
       style={{
         fontFamily: MONO,
         fontSize: 11,
@@ -98,7 +107,7 @@ export function IconButton({
         lineHeight: "1.4",
       }}
     >
-      {children}
+      <span aria-hidden="true">{children}</span>
     </button>
   );
 }
@@ -148,10 +157,10 @@ export function FormFooter({
   return (
     <div style={{ marginTop: 20 }}>
       {error && (
-        <p style={{ ...errorTextStyle, marginTop: 0, marginBottom: 10 }}>{error}</p>
+        <p role="alert" style={{ ...errorTextStyle, marginTop: 0, marginBottom: 10 }}>{error}</p>
       )}
       {success && (
-        <p style={successTextStyle}>Saved. Changes propagate within ~10 seconds.</p>
+        <p role="status" style={successTextStyle}>Saved. Changes propagate within ~10 seconds.</p>
       )}
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 12 }}>
         <button

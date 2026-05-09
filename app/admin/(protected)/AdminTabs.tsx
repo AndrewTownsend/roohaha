@@ -49,6 +49,8 @@ export default function AdminTabs({
   return (
     <div>
       <div
+        role="tablist"
+        aria-label="Admin sections"
         style={{
           display: "flex",
           gap: 0,
@@ -59,7 +61,11 @@ export default function AdminTabs({
         {TABS.map((tab) => (
           <button
             key={tab.id}
+            id={`tab-${tab.id}`}
+            role="tab"
             type="button"
+            aria-selected={active === tab.id}
+            aria-controls="admin-tabpanel"
             onClick={() => switchTab(tab.id)}
             style={{
               fontFamily: MONO,
@@ -78,10 +84,16 @@ export default function AdminTabs({
         ))}
       </div>
 
-      {active === "projects" && <ProjectsForm initialProjects={initialProjects} />}
-      {active === "reading" && <ReadingForm initialReading={initialReading} />}
-      {active === "playing" && <PlayingForm initialPlaying={initialPlaying} />}
-      {active === "gates" && <FeatureGatesForm initialGates={initialGates} />}
+      <div
+        id="admin-tabpanel"
+        role="tabpanel"
+        aria-labelledby={`tab-${active}`}
+      >
+        {active === "projects" && <ProjectsForm initialProjects={initialProjects} />}
+        {active === "reading" && <ReadingForm initialReading={initialReading} />}
+        {active === "playing" && <PlayingForm initialPlaying={initialPlaying} />}
+        {active === "gates" && <FeatureGatesForm initialGates={initialGates} />}
+      </div>
     </div>
   );
 }
