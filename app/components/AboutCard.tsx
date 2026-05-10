@@ -16,7 +16,7 @@ export default function AboutCard() {
       <p style={{ fontSize: "0.95rem", color: "#3d5068", lineHeight: 1.65, marginBottom: 14 }}>
         Senior Full Stack Software Engineer with deep experience across the full stack — from
         crafting intuitive front-ends to architecting large-scale backend systems. I work well
-        independently, thrive in ambiguity, ship quickly without breaking things, and regularly
+        independently and as part of a team, thrive in ambiguity, ship quickly without breaking things, and regularly
         use AI as a collaborative tool in my workflow.
       </p>
       <p style={{ fontSize: "0.875rem", color: "#5a7088", lineHeight: 1.6, marginBottom: 14 }}>
