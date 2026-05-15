@@ -1,5 +1,4 @@
-import { NextResponse, type NextFetchEvent, type NextRequest } from "next/server";
-import type { NextAuthRequest } from "next-auth";
+import { NextResponse, type NextFetchEvent, type NextMiddleware, type NextRequest } from "next/server";
 import { auth } from "./auth";
 
 // Percent-encoded characters that are never valid in legitimate paths on this
@@ -14,7 +13,7 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
     return new NextResponse(null, { status: 404 });
   }
   if (ADMIN_PATH_RE.test(request.nextUrl.pathname)) {
-    return auth(request as NextAuthRequest, event);
+    return (auth as unknown as NextMiddleware)(request, event);
   }
 }
 
