@@ -12,13 +12,16 @@ export const SKILLS = [
   "VueJS",
   "MeteorJS",
   "Springboot",
-  "AWS",
   "Kubernetes",
   "Kafka",
+  "Redis",
+  "AMQ",
   "CosmosDB",
   "MongoDB",
   "Postgres",
+  "MySQL",
   "Docker",
+  "AWS",
   "Azure",
 ] as const;
 
@@ -89,7 +92,7 @@ export const HIGHLIGHT_GROUPS: HighlightGroup[] = [
       },
       {
         title: "Backend powering every cash register in the continental US",
-        sub: "Scaled from 100 brick-and-mortar stores to 4,500",
+        sub: "Scaled from 100 brick-and-mortar stores to ~4,500",
       },
     ],
   },
