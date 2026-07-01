@@ -213,7 +213,7 @@ export async function saveProjects(
 
   logger.info({ email: guard.email }, "[admin] projects saved");
   updateTag("projects");
-  revalidatePath("/");
+  revalidatePath("/", "layout");
 
   return { ok: true, value: projects };
 }

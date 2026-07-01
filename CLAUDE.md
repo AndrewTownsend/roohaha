@@ -39,6 +39,7 @@ Personal portfolio site for Andrew V. Townsend. Next.js 16 App Router, deployed 
 - Auth: GitHub OAuth, JWT sessions (no DB), allowlist via `ADMIN_EMAILS` env var.
 - Defense-in-depth: middleware gate (`proxy.ts`) *and* `auth()` re-check inside the Server Action (`app/admin/actions.ts`).
 - Edge Config payload is capped at ~6 KB in the Server Action before the PATCH is sent.
+- **Known limitation — homepage shows stale data on first visit after save.** The homepage is a statically pre-rendered Full Route Cache entry on Vercel's CDN. `revalidatePath` uses ISR stale-while-revalidate semantics: the first request after an admin save still gets the old cached HTML while Next.js regenerates in the background. A second page load will show fresh data. Individual project pages are not affected (they are dynamic and always fetch live). Fixing this properly would require making `<ProjectsCard>` a dynamic hole via `<Suspense>`, which complicates the `<Nav>` visibility flag that also depends on projects data.
 
 ### Env vars
 
