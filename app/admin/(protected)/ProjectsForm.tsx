@@ -482,7 +482,7 @@ export default function ProjectsForm({
 
       {items.map((item, i) => (
         <ProjectCard
-          key={`${i}-${item.project.id}`}
+          key={i}
           item={item}
           onToggle={() => toggleExpand(i)}
           onUpdate={(patch) => updateProject(i, patch)}

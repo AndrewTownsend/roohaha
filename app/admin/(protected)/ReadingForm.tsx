@@ -72,7 +72,7 @@ export default function ReadingForm({
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
         {books.map((book, i) => (
           <div
-            key={`${i}-${book.title}`}
+            key={i}
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr auto",
