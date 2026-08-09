@@ -72,7 +72,7 @@ export default function PlayingForm({
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
         {games.map((game, i) => (
           <div
-            key={`${i}-${game.title}`}
+            key={i}
             style={{
               display: "grid",
               gridTemplateColumns: "1fr auto",
