@@ -21,7 +21,9 @@ export async function readFeatureGates(): Promise<FeatureGates> {
     return DEFAULT_GATES;
   }
   const client = createClient(process.env.EDGE_CONFIG);
-  const stored = await client.get<Partial<FeatureGates>>("featureGates");
+  const stored = await client.get<Partial<FeatureGates>>("featureGates", {
+    consistentRead: true,
+  });
   // When Edge Config is present, absent or unrecognised keys default to false
   // so a missing/deleted key never surfaces intentionally-hidden content.
   return {

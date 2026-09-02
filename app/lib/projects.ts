@@ -17,7 +17,9 @@ async function fetchProjects(): Promise<ProjectEntry[]> {
     return JSON.parse(raw) as ProjectEntry[];
   }
   const client = createClient(process.env.EDGE_CONFIG);
-  const entries = await client.get<ProjectEntry[]>("projects");
+  const entries = await client.get<ProjectEntry[]>("projects", {
+    consistentRead: true,
+  });
   return entries ?? [];
 }
 
