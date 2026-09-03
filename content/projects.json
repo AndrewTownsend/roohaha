@@ -19,9 +19,9 @@
     "visible": true,
     "title": "Reticle",
     "tagline": "Screenshot & annotation tool",
-    "desc": "Reticle is a lightweight screenshot and annotation tool for Apple Silicon Macs, built to replace Lightshot as it loses support for Intel-only apps. Region capture, quick annotation, and instant clipboard sharing — native and fast.",
-    "status": "building",
-    "statusLabel": "In development",
+    "desc": "Screenshot tools used to be small, fast, and out of the way. Reticle is a modern return to that: press a global hotkey, drag out a region, mark it up with arrows, shapes, and text, then copy it to the clipboard or save a PNG. Menu-bar only, no account, and nothing ever leaves your Mac.",
+    "status": "beta",
+    "statusLabel": "Coming to the Mac App Store",
     "meta": "2026 · macOS",
     "links": [
       { "kind": "page", "label": "Project page", "href": "/projects/reticle", "primary": true }

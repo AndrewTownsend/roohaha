@@ -15,10 +15,10 @@ async function fetchContent(): Promise<Content> {
     throw new Error("EDGE_CONFIG is not set — run `vercel env pull .env.local` to configure it");
   }
   const client = createClient(process.env.EDGE_CONFIG);
-  const all = await client.getAll<{ reading: Book[]; playing: Game[] }>([
-    "reading",
-    "playing",
-  ]);
+  const all = await client.getAll<{ reading: Book[]; playing: Game[] }>(
+    ["reading", "playing"],
+    { consistentRead: true },
+  );
   return { reading: all?.reading ?? [], playing: all?.playing ?? [] };
 }
 

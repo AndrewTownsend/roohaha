@@ -13,6 +13,8 @@ export async function readProjectsForAdmin(): Promise<AdminProject[]> {
     return JSON.parse(raw) as AdminProject[];
   }
   const client = createClient(process.env.EDGE_CONFIG);
-  const entries = await client.get<AdminProject[]>("projects");
+  const entries = await client.get<AdminProject[]>("projects", {
+    consistentRead: true,
+  });
   return entries ?? [];
 }
