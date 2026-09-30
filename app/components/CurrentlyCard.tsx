@@ -14,7 +14,7 @@ export default function CurrentlyCard() {
           marginBottom: 2,
         }}
       >
-        Senior Engineer, Team Lead
+        Senior Engineer
       </div>
       <div
         style={{
@@ -24,12 +24,11 @@ export default function CurrentlyCard() {
           marginBottom: 10,
         }}
       >
-        Craft Education · 2025–Present
+        Adduro · 2026–Present
       </div>
       <p style={{ fontSize: "0.875rem", color: "#3d5068", lineHeight: 1.6 }}>
-        Leading a team building DOL-compliant apprenticeship tooling — automating registration,
-        document signing, and program tracking for apprentices nationwide. Greenfield TypeScript
-        services integrated with several disparate external vendors.
+        Third engineer at a streaming ad platform built on a radical idea — show advertisers what
+        their ads actually did, instead of asking them to take it on faith. TypeScript, C#, and Golang.
       </p>
     </Card>
   );
